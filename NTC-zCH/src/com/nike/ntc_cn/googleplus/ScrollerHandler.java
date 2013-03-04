@@ -3,6 +3,7 @@
  */
 package com.nike.ntc_cn.googleplus;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,7 @@ class ScrollerHandler implements OnGlobalLayoutListener, ScrollHandlerInterface 
 		rootView.getViewTreeObserver().addOnGlobalLayoutListener(this);
 	}
 
+	@SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onGlobalLayout() {
@@ -99,11 +101,11 @@ class ScrollerHandler implements OnGlobalLayoutListener, ScrollHandlerInterface 
 		// now we don't want to keep listening because childs of child is
 		// added now so we can start the initial animation .
 		//remove by leikang
-		//if (Util.isJellyBean()) {
-			//rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-		//} else {  //remove by leikang
+		if (Util.isJellyBean()) {
+			rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+		} else {  //remove by leikang
 			rootView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-		//} //remove by leikang
+		} //remove by leikang
 
 		// fake scroll
 		// this to start the animation on the first visible item(s) in the
