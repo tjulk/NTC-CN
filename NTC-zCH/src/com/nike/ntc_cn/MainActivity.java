@@ -13,7 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.nike.ntc_cn.adapter.ActionsAdapter;
-import com.nike.ntc_cn.fragment.AboutFragment;
+import com.nike.ntc_cn.fragment.TutorialFragment;
 import com.nike.ntc_cn.fragment.SandboxFragment;
 import com.nike.ntc_cn.fragment.WebViewFragment;
 
@@ -26,7 +26,7 @@ public class MainActivity extends BaseActivity {
 
   private ActionsContentView viewActionsContentView;
 
-  private Uri currentUri = AboutFragment.ABOUT_URI;
+  private Uri currentUri = TutorialFragment.ABOUT_URI;
   private String currentContentFragmentTag = null;
 
   @Override
@@ -94,13 +94,13 @@ public class MainActivity extends BaseActivity {
         tr.hide(currentFragment);
     }
 
-    if (AboutFragment.ABOUT_URI.equals(uri)) {
-      tag = AboutFragment.TAG;
+    if (TutorialFragment.ABOUT_URI.equals(uri)) {
+      tag = TutorialFragment.TAG;
       final Fragment foundFragment = fm.findFragmentByTag(tag);
       if (foundFragment != null) {
         fragment = foundFragment;
       } else {
-        fragment = new AboutFragment();
+        fragment = new TutorialFragment();
       }
     } else if (SandboxFragment.SETTINGS_URI.equals(uri)) {
       tag = SandboxFragment.TAG;

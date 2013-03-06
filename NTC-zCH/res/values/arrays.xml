@@ -19,10 +19,10 @@
     <!-- Actions -->
     <array name="actions_icons">
         <item>@null</item>
-        <item>@drawable/ic_nav_home</item>
+        <item>@drawable/ic_nav_hangouts</item>
         <item>@drawable/ic_nav_profile</item>
         <item>@null</item>
-        <item>@drawable/ic_nav_hangouts</item>
+        <item>@drawable/ic_nav_home</item>
         <item>@drawable/ic_nav_communities</item>
         <item>@drawable/ic_nav_events</item>
         <item>@drawable/ic_nav_circles</item>
@@ -39,10 +39,10 @@
 
     <string-array name="actions_names">
         <item>Settings</item>
-        <item>关于</item>
+        <item>教程</item>
         <item>设置</item>
         <item>Details</item>
-        <item>教程</item>
+        <item>关于</item>
         <item>进度</item>
         <item>奖励</item>
         <item>商店</item>
