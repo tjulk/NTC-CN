@@ -18,7 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class ExamplesActivity extends FragmentActivity {
+public class ExamplesActivity extends BaseActivity {
 
   private static final String STATE_URI = "state:uri";
   private static final String STATE_FRAGMENT_TAG = "state:fragment_tag";

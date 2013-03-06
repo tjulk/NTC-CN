@@ -39,6 +39,22 @@ public final class R {
         public static final int width_values=0x7f0a0007;
     }
     public static final class attr {
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int actionbarCompatItemHomeStyle=0x7f01000e;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int actionbarCompatItemStyle=0x7f01000d;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int actionbarCompatProgressIndicatorStyle=0x7f01000f;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int actionbarCompatTitleStyle=0x7f01000c;
         /**  Actions layout ID to link at view creation time. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -55,6 +71,10 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int actions_spacing=0x7f010004;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int borderDrawable=0x7f010011;
         /**  Content layout ID to link at view creation time. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -92,6 +112,10 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int fling_duration=0x7f01000a;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int maskDrawable=0x7f010010;
         /**  Drawable to be used to draw shadow dropped by content view to actions one. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -159,6 +183,7 @@ containing a value of this type.
         public static final int default_pref_show_shadow=0x7f0c0000;
     }
     public static final class color {
+        public static final int actionbar_title_color=0x7f0b0005;
         public static final int actions_bg=0x7f0b0003;
         public static final int actions_divider=0x7f0b0004;
         public static final int bottom_bar_bg=0x7f0b0002;
@@ -166,6 +191,9 @@ containing a value of this type.
         public static final int divider=0x7f0b0000;
     }
     public static final class dimen {
+        public static final int actionbar_compat_button_home_width=0x7f07000a;
+        public static final int actionbar_compat_button_width=0x7f070009;
+        public static final int actionbar_compat_height=0x7f070008;
         /**  左侧边缘宽度 
          */
         public static final int actions_spacing=0x7f070007;
@@ -178,86 +206,101 @@ containing a value of this type.
         public static final int divider_size=0x7f070005;
     }
     public static final class drawable {
-        public static final int bg_blue_tile=0x7f020000;
-        public static final int bg_green_tile=0x7f020001;
-        public static final int bg_red_tile=0x7f020002;
-        public static final int bg_yellow_tile=0x7f020003;
-        public static final int custom_background=0x7f020004;
-        public static final int ic_action_about=0x7f020005;
-        public static final int ic_action_settings=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int ic_link_dropbox=0x7f020008;
-        public static final int ic_link_evernote=0x7f020009;
-        public static final int ic_link_facebook=0x7f02000a;
-        public static final int ic_link_github=0x7f02000b;
-        public static final int ic_link_google_plus=0x7f02000c;
-        public static final int ic_link_lastfm=0x7f02000d;
-        public static final int ic_link_linkedin=0x7f02000e;
-        public static final int ic_link_skype=0x7f02000f;
-        public static final int ic_link_stackoverflow=0x7f020010;
-        public static final int ic_link_twitter=0x7f020011;
-        public static final int ic_link_vk=0x7f020012;
-        public static final int ic_link_yandex=0x7f020013;
-        public static final int ic_link_youtube=0x7f020014;
-        public static final int ic_menu_moreoverflow_normal_holo_light=0x7f020015;
-        public static final int ic_nav_apps=0x7f020016;
-        public static final int ic_nav_circles=0x7f020017;
-        public static final int ic_nav_communities=0x7f020018;
-        public static final int ic_nav_events=0x7f020019;
-        public static final int ic_nav_hangouts=0x7f02001a;
-        public static final int ic_nav_home=0x7f02001b;
-        public static final int ic_nav_local=0x7f02001c;
-        public static final int ic_nav_messenger=0x7f02001d;
-        public static final int ic_nav_myphotos=0x7f02001e;
-        public static final int ic_nav_profile=0x7f02001f;
-        public static final int item_background_holo_light=0x7f020020;
-        public static final int list_focused_holo=0x7f020021;
-        public static final int list_longpressed_holo=0x7f020022;
-        public static final int list_pressed_holo_light=0x7f020023;
-        public static final int list_selector_background_transition_holo_light=0x7f020024;
-        public static final int list_selector_disabled_holo_light=0x7f020025;
-        public static final int progress_bg_holo_light=0x7f020026;
-        public static final int progress_horizontal_holo_light=0x7f020027;
-        public static final int progress_primary_holo_light=0x7f020028;
-        public static final int progress_secondary_holo_light=0x7f020029;
-        public static final int shadow=0x7f02002a;
+        public static final int actionbar_compat_item=0x7f020000;
+        public static final int actionbar_compat_item_focused=0x7f020001;
+        public static final int actionbar_compat_item_pressed=0x7f020002;
+        public static final int actionbar_shadow=0x7f020003;
+        public static final int bg_blue_tile=0x7f020004;
+        public static final int bg_green_tile=0x7f020005;
+        public static final int bg_red_tile=0x7f020006;
+        public static final int bg_yellow_tile=0x7f020007;
+        public static final int custom_background=0x7f020008;
+        public static final int ic_action_about=0x7f020009;
+        public static final int ic_action_refresh=0x7f02000a;
+        public static final int ic_action_search=0x7f02000b;
+        public static final int ic_action_settings=0x7f02000c;
+        public static final int ic_action_share=0x7f02000d;
+        public static final int ic_launcher=0x7f02000e;
+        public static final int ic_link_dropbox=0x7f02000f;
+        public static final int ic_link_evernote=0x7f020010;
+        public static final int ic_link_facebook=0x7f020011;
+        public static final int ic_link_github=0x7f020012;
+        public static final int ic_link_google_plus=0x7f020013;
+        public static final int ic_link_lastfm=0x7f020014;
+        public static final int ic_link_linkedin=0x7f020015;
+        public static final int ic_link_skype=0x7f020016;
+        public static final int ic_link_stackoverflow=0x7f020017;
+        public static final int ic_link_twitter=0x7f020018;
+        public static final int ic_link_vk=0x7f020019;
+        public static final int ic_link_yandex=0x7f02001a;
+        public static final int ic_link_youtube=0x7f02001b;
+        public static final int ic_menu_moreoverflow_normal_holo_light=0x7f02001c;
+        public static final int ic_menu_share=0x7f02001d;
+        public static final int ic_nav_apps=0x7f02001e;
+        public static final int ic_nav_circles=0x7f02001f;
+        public static final int ic_nav_communities=0x7f020020;
+        public static final int ic_nav_events=0x7f020021;
+        public static final int ic_nav_hangouts=0x7f020022;
+        public static final int ic_nav_home=0x7f020023;
+        public static final int ic_nav_local=0x7f020024;
+        public static final int ic_nav_messenger=0x7f020025;
+        public static final int ic_nav_myphotos=0x7f020026;
+        public static final int ic_nav_profile=0x7f020027;
+        public static final int item_background_holo_light=0x7f020028;
+        public static final int list_focused_holo=0x7f020029;
+        public static final int list_longpressed_holo=0x7f02002a;
+        public static final int list_pressed_holo_light=0x7f02002b;
+        public static final int list_selector_background_transition_holo_light=0x7f02002c;
+        public static final int list_selector_disabled_holo_light=0x7f02002d;
+        public static final int progress_bg_holo_light=0x7f02002e;
+        public static final int progress_horizontal_holo_light=0x7f02002f;
+        public static final int progress_primary_holo_light=0x7f020030;
+        public static final int progress_secondary_holo_light=0x7f020031;
+        public static final int shadow=0x7f020032;
     }
     public static final class id {
+        public static final int actionbar_compat=0x7f060008;
+        public static final int actionbar_compat_item_refresh=0x7f06000b;
+        public static final int actionbar_compat_item_refresh_progress=0x7f06000a;
+        public static final int actionbar_compat_title=0x7f060009;
         public static final int actions=0x7f060003;
-        public static final int actionsContentView=0x7f06000b;
+        public static final int actionsContentView=0x7f060010;
         public static final int actions_width=0x7f060001;
         public static final int both=0x7f060005;
-        public static final int bottomBar=0x7f06000a;
+        public static final int bottomBar=0x7f06000f;
         public static final int content=0x7f060004;
-        public static final int divider=0x7f060009;
+        public static final int divider=0x7f06000e;
         public static final int edge=0x7f060007;
         public static final int full=0x7f060006;
+        public static final int menu_refresh=0x7f06000c;
+        public static final int menu_search=0x7f060028;
+        public static final int menu_share=0x7f060029;
         public static final int none=0x7f060002;
-        public static final int prefFadeMaxValue=0x7f06000e;
-        public static final int prefFadeMaxValueValue=0x7f06000f;
-        public static final int prefFadeType=0x7f06000c;
-        public static final int prefFadeTypeValue=0x7f06000d;
-        public static final int prefFlingDuration=0x7f060010;
-        public static final int prefFlingDurationValue=0x7f060011;
-        public static final int prefShadowWidth=0x7f060014;
-        public static final int prefShadowWidthValue=0x7f060015;
-        public static final int prefShowShadow=0x7f060012;
-        public static final int prefShowShadowValue=0x7f060013;
-        public static final int prefSpacingActionsWidth=0x7f06001b;
-        public static final int prefSpacingActionsWidthValue=0x7f06001c;
-        public static final int prefSpacingType=0x7f060016;
-        public static final int prefSpacingTypeValue=0x7f060017;
-        public static final int prefSpacingWidth=0x7f060018;
-        public static final int prefSpacingWidthAdditionalValue=0x7f060019;
-        public static final int prefSpacingWidthValue=0x7f06001a;
-        public static final int prefSwipingEdgeWidth=0x7f06001f;
-        public static final int prefSwipingEdgeWidthValue=0x7f060020;
-        public static final int prefSwipingType=0x7f06001d;
-        public static final int prefSwipingTypeValue=0x7f06001e;
-        public static final int progress=0x7f060022;
+        public static final int prefFadeMaxValue=0x7f060013;
+        public static final int prefFadeMaxValueValue=0x7f060014;
+        public static final int prefFadeType=0x7f060011;
+        public static final int prefFadeTypeValue=0x7f060012;
+        public static final int prefFlingDuration=0x7f060015;
+        public static final int prefFlingDurationValue=0x7f060016;
+        public static final int prefShadowWidth=0x7f060019;
+        public static final int prefShadowWidthValue=0x7f06001a;
+        public static final int prefShowShadow=0x7f060017;
+        public static final int prefShowShadowValue=0x7f060018;
+        public static final int prefSpacingActionsWidth=0x7f060020;
+        public static final int prefSpacingActionsWidthValue=0x7f060021;
+        public static final int prefSpacingType=0x7f06001b;
+        public static final int prefSpacingTypeValue=0x7f06001c;
+        public static final int prefSpacingWidth=0x7f06001d;
+        public static final int prefSpacingWidthAdditionalValue=0x7f06001e;
+        public static final int prefSpacingWidthValue=0x7f06001f;
+        public static final int prefSwipingEdgeWidth=0x7f060024;
+        public static final int prefSwipingEdgeWidthValue=0x7f060025;
+        public static final int prefSwipingType=0x7f060022;
+        public static final int prefSwipingTypeValue=0x7f060023;
+        public static final int progress=0x7f060027;
         public static final int right_offset=0x7f060000;
-        public static final int textView1=0x7f060008;
-        public static final int webview=0x7f060021;
+        public static final int textView1=0x7f06000d;
+        public static final int webview=0x7f060026;
     }
     public static final class integer {
         public static final int config_roate_time=0x7f080005;
@@ -283,24 +326,33 @@ containing a value of this type.
     public static final class layout {
         public static final int about=0x7f030000;
         public static final int action_list_item=0x7f030001;
-        public static final int actions=0x7f030002;
-        public static final int category_list_item=0x7f030003;
-        public static final int content=0x7f030004;
-        public static final int example=0x7f030005;
-        public static final int pref_fade=0x7f030006;
-        public static final int pref_other=0x7f030007;
-        public static final int pref_shadow=0x7f030008;
-        public static final int pref_spacing=0x7f030009;
-        public static final int pref_swiping=0x7f03000a;
-        public static final int sandbox=0x7f03000b;
-        public static final int webview=0x7f03000c;
+        public static final int actionbar_compat=0x7f030002;
+        public static final int actionbar_indeterminate_progress=0x7f030003;
+        public static final int actions=0x7f030004;
+        public static final int category_list_item=0x7f030005;
+        public static final int content=0x7f030006;
+        public static final int example=0x7f030007;
+        public static final int pref_fade=0x7f030008;
+        public static final int pref_other=0x7f030009;
+        public static final int pref_shadow=0x7f03000a;
+        public static final int pref_spacing=0x7f03000b;
+        public static final int pref_swiping=0x7f03000c;
+        public static final int sandbox=0x7f03000d;
+        public static final int webview=0x7f03000e;
+    }
+    public static final class menu {
+        public static final int main=0x7f0e0000;
     }
     public static final class string {
         public static final int about_details=0x7f090004;
         public static final int about_play=0x7f090005;
         public static final int about_tutorial=0x7f090006;
+        public static final int alternate_title=0x7f090016;
         public static final int app_name=0x7f090002;
         public static final int link_to_sources=0x7f090003;
+        public static final int menu_refresh=0x7f090018;
+        public static final int menu_search=0x7f090019;
+        public static final int menu_share=0x7f09001a;
         public static final int pref_fade=0x7f09000e;
         public static final int pref_fade_max_value=0x7f090010;
         public static final int pref_fade_type=0x7f09000f;
@@ -320,8 +372,18 @@ containing a value of this type.
         public static final int pref_swiping_type=0x7f090012;
         public static final int property_name=0x7f090000;
         public static final int sources_link=0x7f090001;
+        public static final int toggle_title=0x7f090017;
     }
     public static final class style {
+        public static final int ActionBar=0x7f0d000c;
+        public static final int ActionBarCompat=0x7f0d0005;
+        public static final int ActionBarCompatHomeItem=0x7f0d000b;
+        public static final int ActionBarCompatItem=0x7f0d000a;
+        public static final int ActionBarCompatItemBase=0x7f0d0006;
+        public static final int ActionBarCompatProgressIndicator=0x7f0d0007;
+        public static final int ActionBarCompatTitle=0x7f0d0009;
+        public static final int ActionBarCompatTitleBase=0x7f0d0008;
+        public static final int ActionBarTitle=0x7f0d000d;
         public static final int AppTheme=0x7f0d0000;
         public static final int HeaderText=0x7f0d0002;
         public static final int HoloButton_Borderless=0x7f0d0001;
@@ -565,5 +627,99 @@ containing a value of this type.
           @attr name android:swiping_type
         */
         public static final int ActionsContentView_swiping_type = 2;
+        /** Attributes that can be used with a AppTheme.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #AppTheme_actionbarCompatItemHomeStyle com.nike.ntc_cn:actionbarCompatItemHomeStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppTheme_actionbarCompatItemStyle com.nike.ntc_cn:actionbarCompatItemStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppTheme_actionbarCompatProgressIndicatorStyle com.nike.ntc_cn:actionbarCompatProgressIndicatorStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #AppTheme_actionbarCompatTitleStyle com.nike.ntc_cn:actionbarCompatTitleStyle}</code></td><td></td></tr>
+           </table>
+           @see #AppTheme_actionbarCompatItemHomeStyle
+           @see #AppTheme_actionbarCompatItemStyle
+           @see #AppTheme_actionbarCompatProgressIndicatorStyle
+           @see #AppTheme_actionbarCompatTitleStyle
+         */
+        public static final int[] AppTheme = {
+            0x7f01000c, 0x7f01000d, 0x7f01000e, 0x7f01000f
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.nike.ntc_cn.R.attr#actionbarCompatItemHomeStyle}
+          attribute's value can be found in the {@link #AppTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:actionbarCompatItemHomeStyle
+        */
+        public static final int AppTheme_actionbarCompatItemHomeStyle = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.nike.ntc_cn.R.attr#actionbarCompatItemStyle}
+          attribute's value can be found in the {@link #AppTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:actionbarCompatItemStyle
+        */
+        public static final int AppTheme_actionbarCompatItemStyle = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.nike.ntc_cn.R.attr#actionbarCompatProgressIndicatorStyle}
+          attribute's value can be found in the {@link #AppTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:actionbarCompatProgressIndicatorStyle
+        */
+        public static final int AppTheme_actionbarCompatProgressIndicatorStyle = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.nike.ntc_cn.R.attr#actionbarCompatTitleStyle}
+          attribute's value can be found in the {@link #AppTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:actionbarCompatTitleStyle
+        */
+        public static final int AppTheme_actionbarCompatTitleStyle = 0;
+        /** Attributes that can be used with a BezelImageView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #BezelImageView_borderDrawable com.nike.ntc_cn:borderDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #BezelImageView_maskDrawable com.nike.ntc_cn:maskDrawable}</code></td><td></td></tr>
+           </table>
+           @see #BezelImageView_borderDrawable
+           @see #BezelImageView_maskDrawable
+         */
+        public static final int[] BezelImageView = {
+            0x7f010010, 0x7f010011
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.nike.ntc_cn.R.attr#borderDrawable}
+          attribute's value can be found in the {@link #BezelImageView} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:borderDrawable
+        */
+        public static final int BezelImageView_borderDrawable = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.nike.ntc_cn.R.attr#maskDrawable}
+          attribute's value can be found in the {@link #BezelImageView} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:maskDrawable
+        */
+        public static final int BezelImageView_maskDrawable = 0;
     };
 }
