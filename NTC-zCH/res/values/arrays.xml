@@ -19,13 +19,13 @@
     <!-- Actions -->
     <array name="actions_icons">
         <item>@null</item>
-        <item>@drawable/ic_action_about</item>
-        <item>@drawable/ic_action_settings</item>
+        <item>@drawable/ic_nav_home</item>
+        <item>@drawable/ic_nav_profile</item>
         <item>@null</item>
-        <item>@drawable/ic_link_dropbox</item>
-        <item>@drawable/ic_link_evernote</item>
-        <item>@drawable/ic_link_facebook</item>
-        <item>@drawable/ic_link_github</item>
+        <item>@drawable/ic_nav_hangouts</item>
+        <item>@drawable/ic_nav_communities</item>
+        <item>@drawable/ic_nav_events</item>
+        <item>@drawable/ic_nav_circles</item>
         <item>@drawable/ic_link_google_plus</item>
         <item>@drawable/ic_link_lastfm</item>
         <item>@drawable/ic_link_linkedin</item>

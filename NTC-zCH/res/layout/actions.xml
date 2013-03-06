@@ -20,5 +20,6 @@
     android:layout_height="match_parent"
     android:background="@color/actions_bg"
     android:cacheColorHint="@color/actions_bg"
-    android:divider="@null"
+    android:divider="@android:color/black"
+    android:dividerHeight="0.5dip"
     android:listSelector="@drawable/item_background_holo_light" />

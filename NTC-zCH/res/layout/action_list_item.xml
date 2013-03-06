@@ -19,7 +19,7 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:drawablePadding="6dip"
+    android:drawablePadding="16dip"
     android:gravity="center_vertical"
     android:minHeight="48dip"
     android:paddingLeft="6dip"
