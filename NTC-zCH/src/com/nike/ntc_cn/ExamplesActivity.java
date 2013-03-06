@@ -2,7 +2,7 @@
 package com.nike.ntc_cn;
 
 import com.nike.ntc_cn.adapter.ActionsAdapter;
-import com.nike.ntc_cn.fragment.AboutFragment;
+import com.nike.ntc_cn.fragment.TutorialListFragment;
 import com.nike.ntc_cn.fragment.SandboxFragment;
 import com.nike.ntc_cn.fragment.WebViewFragment;
 
@@ -27,7 +27,7 @@ public class ExamplesActivity extends BaseActivity {
 
   private ActionsContentView viewActionsContentView;
 
-  private Uri currentUri = AboutFragment.ABOUT_URI;
+  private Uri currentUri = TutorialListFragment.ABOUT_URI;
   private String currentContentFragmentTag = null;
 
   @Override
@@ -95,13 +95,13 @@ public class ExamplesActivity extends BaseActivity {
         tr.hide(currentFragment);
     }
 
-    if (AboutFragment.ABOUT_URI.equals(uri)) {
-      tag = AboutFragment.TAG;
+    if (TutorialListFragment.ABOUT_URI.equals(uri)) {
+      tag = TutorialListFragment.TAG;
       final Fragment foundFragment = fm.findFragmentByTag(tag);
       if (foundFragment != null) {
         fragment = foundFragment;
       } else {
-        fragment = new AboutFragment();
+        fragment = new TutorialListFragment();
       }
     } else if (SandboxFragment.SETTINGS_URI.equals(uri)) {
       tag = SandboxFragment.TAG;

@@ -277,9 +277,11 @@ containing a value of this type.
         public static final int getlean_btn=0x7f060026;
         public static final int getstrong_btn=0x7f060028;
         public static final int gettoned_btn=0x7f060027;
+        public static final int high_btn=0x7f06002c;
         public static final int menu_refresh=0x7f06000c;
-        public static final int menu_search=0x7f06002c;
-        public static final int menu_share=0x7f06002d;
+        public static final int menu_search=0x7f06002f;
+        public static final int menu_share=0x7f060030;
+        public static final int middle_btn=0x7f06002b;
         public static final int none=0x7f060002;
         public static final int prefFadeMaxValue=0x7f060013;
         public static final int prefFadeMaxValueValue=0x7f060014;
@@ -302,10 +304,11 @@ containing a value of this type.
         public static final int prefSwipingEdgeWidthValue=0x7f060025;
         public static final int prefSwipingType=0x7f060022;
         public static final int prefSwipingTypeValue=0x7f060023;
-        public static final int progress=0x7f06002b;
+        public static final int primary_btn=0x7f06002a;
+        public static final int progress=0x7f06002e;
         public static final int right_offset=0x7f060000;
         public static final int textView1=0x7f06000d;
-        public static final int webview=0x7f06002a;
+        public static final int webview=0x7f06002d;
     }
     public static final class integer {
         public static final int config_roate_time=0x7f080005;
@@ -344,7 +347,8 @@ containing a value of this type.
         public static final int pref_swiping=0x7f03000c;
         public static final int sandbox=0x7f03000d;
         public static final int tutorial=0x7f03000e;
-        public static final int webview=0x7f03000f;
+        public static final int tutorial_level=0x7f03000f;
+        public static final int webview=0x7f030010;
     }
     public static final class menu {
         public static final int main=0x7f0e0000;

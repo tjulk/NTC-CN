@@ -24,11 +24,11 @@ import android.view.ViewGroup;
 
 import com.nike.ntc_cn.R;
 
-public class AboutFragment extends Fragment {
-  public static final String TAG = AboutFragment.class.getSimpleName();
+public class TutorialListFragment extends Fragment {
+  public static final String TAG = TutorialListFragment.class.getSimpleName();
 
   private static final String ABOUT_SCHEME = "settings";
-  private static final String ABOUT_AUTHORITY = "about";
+  private static final String ABOUT_AUTHORITY = "tutorial_list";
   public static final Uri ABOUT_URI = new Uri.Builder()
   .scheme(ABOUT_SCHEME)
   .authority(ABOUT_AUTHORITY)

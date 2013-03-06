@@ -1,6 +1,7 @@
 
 package com.nike.ntc_cn.fragment;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,17 +13,17 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.nike.ntc_cn.R;
+import com.nike.ntc_cn.TutorialLevelActivity;
 
 public class TutorialFragment extends Fragment implements OnClickListener {
   public static final String TAG = TutorialFragment.class.getSimpleName();
 
   private static final String ABOUT_SCHEME = "settings";
-  private static final String ABOUT_AUTHORITY = "about";
+  private static final String ABOUT_AUTHORITY = "tutorial";
   public static final Uri ABOUT_URI = new Uri.Builder()
   .scheme(ABOUT_SCHEME)
   .authority(ABOUT_AUTHORITY)
   .build();
-  
   
   private LinearLayout mGetleanBtn;
   private LinearLayout mGettonedBtn;
@@ -45,21 +46,23 @@ public class TutorialFragment extends Fragment implements OnClickListener {
     mGetforcusdBtn.setOnClickListener(this);
     return v;
   }
+  
+  
 
 @Override
 public void onClick(View v) {
 	switch (v.getId()) {
 	case R.id.getlean_btn:
-		Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
+		startActivity(new Intent(getActivity(), TutorialLevelActivity.class));
 		break;
 	case R.id.gettoned_btn:
-		
+		startActivity(new Intent(getActivity(), TutorialLevelActivity.class));
 		break;
 	case R.id.getstrong_btn:
-		
+		startActivity(new Intent(getActivity(), TutorialLevelActivity.class));
 		break;
 	case R.id.getfocused_btn:
-		
+		startActivity(new Intent(getActivity(), TutorialLevelActivity.class));
 		break;
 		
 	default:
