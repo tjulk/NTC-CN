@@ -45,7 +45,7 @@ public class HorizontalGooglePlusLayout extends HorizontalScrollView implements
 		super.onScrollChanged(l, t, oldl, oldt);
 
 		if (mScrollerHandler != null) {
-			mScrollerHandler.onScrollChange();
+			mScrollerHandler.onScrollChange((t-oldt) < 40);
 		}
 	}
 

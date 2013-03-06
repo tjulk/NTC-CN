@@ -81,11 +81,11 @@ public class AnimationHelper implements AnimationListener {
 
 	}
 
-	public void playAnimation(View v, int animation_id, int animator_id) {
+	public void playAnimation(View v, int animation_id, int animator_id, boolean isQuick) {
 		if (v == null)
 			throw new IllegalArgumentException("view cant be null");
 		mQueue.add(new QueueItem(new WeakReference<View>(v), animation_id,
-				animator_id));
+				animator_id, isQuick));
 		startAnimationIfApplicable();
 	}
 
@@ -105,12 +105,25 @@ public class AnimationHelper implements AnimationListener {
 							mAnimation
 									.setAnimationListener(AnimationHelper.this);
 							mAnimation.setRepeatCount(0);
+							
+							if (item.isQuick)
+								mAnimation.setDuration(500);
+							else
+								mAnimation.setDuration(0);
+							
+							
 							item.mView.get().startAnimation(mAnimation);
 							if (Util.isHoneyComb()) {
 								ObjectAnimator animator = (ObjectAnimator) AnimatorInflater
 										.loadAnimator(item.mView.get()
 												.getContext(), item.animatorId);
 								animator.setTarget(item.mView.get());
+								
+								if (item.isQuick)
+									animator.setDuration(500);
+								else
+									animator.setDuration(0);
+								
 								animator.start();
 							}
 						} catch (Exception ex) {
@@ -129,16 +142,18 @@ public class AnimationHelper implements AnimationListener {
 	private static class QueueItem {
 
 		public QueueItem(WeakReference<View> mView, int animationId,
-				int animatorId) {
+				int animatorId, boolean isQuick) {
 			super();
 			this.mView = mView;
 			this.animationId = animationId;
 			this.animatorId = animatorId;
+			this.isQuick = isQuick;
 		}
 
 		WeakReference<View> mView;
 		int animationId;
 		int animatorId;
+		boolean isQuick;
 	}
 
 }

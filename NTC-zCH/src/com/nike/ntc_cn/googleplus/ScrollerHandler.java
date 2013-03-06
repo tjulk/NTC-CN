@@ -123,7 +123,7 @@ class ScrollerHandler implements OnGlobalLayoutListener, ScrollHandlerInterface 
 	 * package visible only to prevent clients from calling it and bring bugs to
 	 * their life
 	 */
-	void onScrollChange() {
+	void onScrollChange(boolean isQuick) {
 		// this will
 		// loop all children
 		// if the child top is less or equal the bottom of the this view (
@@ -144,9 +144,8 @@ class ScrollerHandler implements OnGlobalLayoutListener, ScrollHandlerInterface 
 				if (animationNeedToBeRunOnChild(location)) {
 					++mutuableInteger[0];
 					child.setVisibility(View.INVISIBLE);// hide child and don't
-														// worry animation have
 														// fillAfter = true
-					playAnimation(child, flipAnimation);
+					playAnimation(child, flipAnimation, isQuick);
 
 				} else {
 					// no need to continue checking child
@@ -174,10 +173,10 @@ class ScrollerHandler implements OnGlobalLayoutListener, ScrollHandlerInterface 
 
 	}
 
-	private void playAnimation(View child, boolean flipAnimation) {
+	private void playAnimation(View child, boolean flipAnimation, boolean isQuick) {
 
 		mAnimationHelper.playAnimation(child, R.anim.slide_up,
-				R.animator.rotate_animation);
+				R.animator.rotate_animation, isQuick);
 
 	}
 

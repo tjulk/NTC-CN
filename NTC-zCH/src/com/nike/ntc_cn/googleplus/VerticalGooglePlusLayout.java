@@ -45,8 +45,10 @@ public class VerticalGooglePlusLayout extends ScrollView implements
 	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
 		super.onScrollChanged(l, t, oldl, oldt);
 
+		final boolean isQuick = (t-oldt) <40;
+		
 		if (mScrollerHandler != null) {
-			mScrollerHandler.onScrollChange();
+			mScrollerHandler.onScrollChange(isQuick);
 		}
 	}
 
