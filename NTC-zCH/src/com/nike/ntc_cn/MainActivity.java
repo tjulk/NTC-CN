@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.nike.ntc_cn.adapter.ActionsAdapter;
 import com.nike.ntc_cn.fragment.TutorialFragment;
@@ -49,6 +50,7 @@ public class MainActivity extends BaseActivity {
         final Uri uri = actionsAdapter.getItem(position);
         updateContent(uri);
         viewActionsContentView.showContent();
+        isBackOnce = false;
       }
     });
 
@@ -61,9 +63,10 @@ public class MainActivity extends BaseActivity {
   }
 
   public void onActionsButtonClick(View view) {
-    if (viewActionsContentView.isActionsShown())
+    if (viewActionsContentView.isActionsShown()) {
       viewActionsContentView.showContent();
-    else
+      isBackOnce = false;
+    } else
       viewActionsContentView.showActions();
   }
 
@@ -194,5 +197,20 @@ public class MainActivity extends BaseActivity {
         return;
       }
     }
-  };
+  }
+private boolean isBackOnce = false; 
+@Override
+public void onBackPressed() {
+	if (!isBackOnce) {
+		viewActionsContentView.showActions();
+		Toast.makeText(this, "再按一次返回退出程序",Toast.LENGTH_SHORT).show();
+		isBackOnce = true;
+	} else 
+		super.onBackPressed();
+};
+  
+  
+  
+  
+  
 }
