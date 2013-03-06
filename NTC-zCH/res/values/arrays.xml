@@ -41,7 +41,7 @@
         <item>Settings</item>
         <item>关于</item>
         <item>设置</item>
-        <item>Bookmarks</item>
+        <item>Details</item>
         <item>教程</item>
         <item>进度</item>
         <item>奖励</item>
@@ -52,10 +52,10 @@
         <item>settings://about</item>
         <item>settings://sandbox</item>
         <item>category://bookmarks</item>
-        <item>http://www.dropbox.com</item>
-        <item>http://www.evernote.com</item>
-        <item>http://www.facebook.com</item>
-        <item>http://www.github.com</item>
+        <item>http://m.souhu.com</item>
+        <item>http://m.baidu.com</item>
+        <item>http://m.qq.com</item>
+        <item>http://m.taobao.com</item>
     </string-array>
 
     <!-- Settings arrays -->

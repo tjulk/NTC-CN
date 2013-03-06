@@ -39,7 +39,7 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_height">300dp</item>
     </style>
 
     <style name="root_style">
