@@ -9,9 +9,13 @@ package com.nike.ntc_cn;
 
 public final class R {
     public static final class anim {
-        public static final int slide_up=0x7f040000;
-        public static final int slide_up_left=0x7f040001;
-        public static final int slide_up_right=0x7f040002;
+        public static final int in_from_left=0x7f040000;
+        public static final int in_from_right=0x7f040001;
+        public static final int out_to_left=0x7f040002;
+        public static final int out_to_right=0x7f040003;
+        public static final int slide_up=0x7f040004;
+        public static final int slide_up_left=0x7f040005;
+        public static final int slide_up_right=0x7f040006;
     }
     public static final class animator {
         public static final int rotate_animation=0x7f050000;
