@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import com.nike.ntc_cn.db.InitDataControl;
+
 import android.app.Application;
 import android.util.Log;
 
@@ -15,6 +17,10 @@ public class NtcApplication extends Application {
 	private static final String TAG = "NtcApplication";
 	
 	public static final String zipPath = "mnt/sdcard/Android/data/com.nike.ntc/files/archives/standard.main.zip";
+	
+	public static final String PREFS_NAME = "ntc-zch.pref";
+	
+	public static final String TAG_IS_INIT_DATABASES = "is_init_databases";
 	
 	public static NtcApplication _instance;
 	
@@ -46,6 +52,7 @@ public class NtcApplication extends Application {
 			e.printStackTrace();
 		}
 		
+        InitDataControl.getInstance(this).init();
 	}
 
 	public static NtcApplication getInstance() {

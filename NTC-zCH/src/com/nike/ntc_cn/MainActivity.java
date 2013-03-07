@@ -14,8 +14,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.nike.ntc_cn.adapter.ActionsAdapter;
-import com.nike.ntc_cn.fragment.TutorialFragment;
+import com.nike.ntc_cn.db.T_ExerciseControl;
 import com.nike.ntc_cn.fragment.SandboxFragment;
+import com.nike.ntc_cn.fragment.TutorialFragment;
 import com.nike.ntc_cn.fragment.WebViewFragment;
 
 public class MainActivity extends BaseActivity {
@@ -29,6 +30,7 @@ public class MainActivity extends BaseActivity {
 
   private Uri currentUri = TutorialFragment.ABOUT_URI;
   private String currentContentFragmentTag = null;
+  
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class MainActivity extends BaseActivity {
     mSettingsChangedListener = new SettingsChangedListener();
 
     setContentView(R.layout.example);
-
+    
     viewActionsContentView = (ActionsContentView) findViewById(R.id.actionsContentView);
 
     final ListView viewActionsList = (ListView) findViewById(R.id.actions);
@@ -50,7 +52,6 @@ public class MainActivity extends BaseActivity {
         final Uri uri = actionsAdapter.getItem(position);
         updateContent(uri);
         viewActionsContentView.showContent();
-        isBackOnce = false;
       }
     });
 
@@ -60,12 +61,12 @@ public class MainActivity extends BaseActivity {
     }
 
     updateContent(currentUri);
+    
   }
 
   public void onActionsButtonClick(View view) {
     if (viewActionsContentView.isActionsShown()) {
       viewActionsContentView.showContent();
-      isBackOnce = false;
     } else
       viewActionsContentView.showActions();
   }
@@ -198,18 +199,14 @@ public class MainActivity extends BaseActivity {
       }
     }
   }
-private boolean isBackOnce = false; 
 @Override
 public void onBackPressed() {
-	if (!isBackOnce) {
+	if (!viewActionsContentView.isActionsShown()) {
 		viewActionsContentView.showActions();
 		Toast.makeText(this, "再按一次返回退出程序",Toast.LENGTH_SHORT).show();
-		isBackOnce = true;
 	} else 
 		super.onBackPressed();
-};
-  
-  
+}
   
   
   
