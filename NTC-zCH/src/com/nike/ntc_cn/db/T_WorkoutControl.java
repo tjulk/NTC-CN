@@ -6,6 +6,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
+import com.nike.ntc_cn.TutorialLevelActivity;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -91,13 +93,15 @@ public final class T_WorkoutControl extends DBControl{
 	
 
 	public List<M_Workouts> getWorkoutsList(String goal, String level) {
-		List<M_Workouts> lastFreqs = null;
+		List<M_Workouts> lastFreqs = new ArrayList<M_Workouts>();
 		SQLiteDatabase db =  mOpenHelper.getReadableDatabase();
-		Cursor  cursor = db.query(Workouts.TABLE_NAME, Workouts.COLUMNS, "goal = '" + goal + "' and level = '" + level + "'", null, null, null, null);
+		String selection = ("goal = '" + goal + "' and level = '" + level + "'");
+		if (goal.equals(TutorialLevelActivity.GOAL_FOCOUS))
+			selection = ("goal = '" + goal + "'");
+		
+		Cursor  cursor = db.query(Workouts.TABLE_NAME,Workouts.COLUMNS, selection , null, null, null, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                lastFreqs = new ArrayList<M_Workouts>(cursor.getCount());
-                
                 int idIndex = cursor.getColumnIndex(Workouts._id.name());
                 int nameIndex = cursor.getColumnIndex(Workouts.name.name());
                 int titleIndex = cursor.getColumnIndex(Workouts.title.name());

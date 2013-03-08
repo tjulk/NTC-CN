@@ -26,7 +26,7 @@ public class TutorialLevelActivity extends BaseActivity implements OnClickListen
 	  public static final String LEVEL_HIGH = "advanced";
 
 	  private String mTutorialGoal = GOAL_GETLEAN;
-	  private String mTutorialLevel = LEVEL_PRIMARY;
+	  private String mTutorialLevel = LEVEL_NONE;
 
 	  private LinearLayout mPrimaryBtn;
 	  private LinearLayout mMiddleBtn;
