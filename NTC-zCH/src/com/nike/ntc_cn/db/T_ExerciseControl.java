@@ -1,18 +1,11 @@
 package com.nike.ntc_cn.db;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
 import android.content.Context;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.TextUtils;
 
 public final class T_ExerciseControl extends DBControl{
 	/****************************************************************************************************************************/
@@ -46,6 +39,22 @@ public final class T_ExerciseControl extends DBControl{
 			"video_name TEXT ,archive TEXT , UNIQUE (name) ON CONFLICT REPLACE)";
 	
 	/********************************************************* 数据库相关 结束*******************************************************************/
+	
+	
+	public class M_Exercises {
+		public int _id;
+		public String name;
+		public String title;
+		public int duration;
+		public String quipment;
+		public String footnote;
+		public String thumbnail_medium;
+		public String thumbnail_small;
+		public String video_extension;
+		public String video_name;
+		public String archive;
+	}
+	
 	
     /** 单例 */
     private static volatile T_ExerciseControl instance = null;

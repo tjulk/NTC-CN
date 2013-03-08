@@ -30,5 +30,14 @@ public final class T_WorkoutAudioClipsControl {
 
 	public static final String createTableSql = "CREATE TABLE workout_audio_clips (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
 			" workout_name TEXT ,audio_clip_name TEXT ,is_intro INTEGER ,start_time REAL ,archive TEXT )";
+	
+	public class M_WorkoutAudioClips {
+		public int _id;
+		public String workout_name;
+		public String audio_clip_name;
+		public int is_intro;
+		public float start_time;
+		public String archive;
+	}
 
 }

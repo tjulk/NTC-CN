@@ -14,15 +14,15 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<resources>
-    <dimen name="divider_size">.9dp</dimen>
-    <dimen name="divider_large_size">1.5dp</dimen>
-    <!-- 左侧边缘宽度 -->
-    <dimen name="actions_spacing">0dp</dimen>
-    
-    <dimen name="actionbar_compat_height">48dp</dimen>
-    <dimen name="actionbar_compat_button_width">48dp</dimen>
-    <dimen name="actionbar_compat_button_home_width">56dp</dimen>
-    
-    <dimen name="tutorial_list_item_height">300dip</dimen>
-</resources>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/textViewCustomStyle"
+	android:background="@drawable/bg_blue_tile" >
+
+	<TextView android:id="@+id/workout_name"
+	    android:layout_width="match_parent"
+	    android:layout_height="fill_parent"
+	    android:textSize="18dip"/>
+</LinearLayout>

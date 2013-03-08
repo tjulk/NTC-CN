@@ -31,4 +31,13 @@ public final class T_WorkoutExercisesControl {
 	public static final String createTableSql = "CREATE TABLE workout_exercises (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
 			"workout_name TEXT ,exercise_name TEXT ,sort_order INTEGER ,archive TEXT )";
 
+	public class M_WorkoutExercises {
+		public int _id;
+		public String workout_name;
+		public String exercise_name;
+		public int sort_order;
+		public String archive;
+	}
+	
+	
 }

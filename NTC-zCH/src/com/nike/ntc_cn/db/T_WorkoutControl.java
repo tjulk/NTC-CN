@@ -1,6 +1,47 @@
 package com.nike.ntc_cn.db;
 
-public final class T_WorkoutControl {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
+public final class T_WorkoutControl extends DBControl{
+	
+	private Context mContext;
+	
+	protected T_WorkoutControl(Context context, Executor executor,
+			SQLiteOpenHelper openHelper) {
+		super(context, executor, openHelper);
+		
+		mContext = context;
+	}
+	
+	public class M_Workouts {
+		public int _id;
+		public String name;
+		public String title;
+		public String goal;
+		public String level;
+		public int duration;
+		public String equipment;
+		public String completed_audio_file;
+		public String archive;
+		@Override
+		public String toString() {
+			return "M_Workouts [_id=" + _id + ", name=" + name + ", title="
+					+ title + ", goal=" + goal + ", level=" + level
+					+ ", duration=" + duration + ", equipment=" + equipment
+					+ ", completed_audio_file=" + completed_audio_file
+					+ ", archive=" + archive + "]";
+		}
+	}
 
 	enum Workouts {
 		_id, name, title, goal, level, duration, equipment, completed_audio_file
@@ -32,5 +73,62 @@ public final class T_WorkoutControl {
 	public static final String createTableSql = "CREATE TABLE workouts (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
 			"name TEXT ,title TEXT ,goal TEXT ,level TEXT ,duration INTEGER ," +
 			"equipment TEXT ,completed_audio_file TEXT ,archive TEXT )";
+	
+	
+	private static T_WorkoutControl instance;
+	
+	public static T_WorkoutControl getInstance(Context context) {
+        if (instance == null) {
+            context = context.getApplicationContext();
+            ThreadFactory logThreadFactory = Executors.defaultThreadFactory();
+            Executor logExecutor = Executors.newSingleThreadExecutor(logThreadFactory);
+            SQLiteOpenHelper openHelper = DbOpenHelper.getInstance(context, DBControl.DB_NAME, DBControl.DB_VERSION,
+                    logExecutor);
+            instance = new T_WorkoutControl(context, logExecutor, openHelper);
+        }
+        return instance;
+    }
+	
+
+	public List<M_Workouts> getWorkoutsList(String goal, String level) {
+		List<M_Workouts> lastFreqs = null;
+		SQLiteDatabase db =  mOpenHelper.getReadableDatabase();
+		Cursor  cursor = db.query(Workouts.TABLE_NAME, Workouts.COLUMNS, "goal = '" + goal + "' and level = '" + level + "'", null, null, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                lastFreqs = new ArrayList<M_Workouts>(cursor.getCount());
+                
+                int idIndex = cursor.getColumnIndex(Workouts._id.name());
+                int nameIndex = cursor.getColumnIndex(Workouts.name.name());
+                int titleIndex = cursor.getColumnIndex(Workouts.title.name());
+                int goalIndex = cursor.getColumnIndex(Workouts.goal.name());
+                int levelIndex = cursor.getColumnIndex(Workouts.level.name());
+                int durationIndex = cursor.getColumnIndex(Workouts.duration.name());
+                int equipmentIndex = cursor.getColumnIndex(Workouts.equipment.name());
+                int completed_audio_fileIndex = cursor.getColumnIndex(Workouts.completed_audio_file.name());
+                int archiveIndex = cursor.getColumnIndex(Workouts.archive.name());
+                
+                do {
+                	M_Workouts workoutsFreq = new M_Workouts();
+                	workoutsFreq._id = cursor.getInt(idIndex);
+                	workoutsFreq.name = cursor.getString(nameIndex);
+                	workoutsFreq.title = cursor.getString(titleIndex);
+                	workoutsFreq.goal = cursor.getString(goalIndex);
+                	workoutsFreq.level = cursor.getString(levelIndex);
+                	workoutsFreq.duration = cursor.getInt(durationIndex);
+                	workoutsFreq.equipment = cursor.getString(equipmentIndex);
+                	workoutsFreq.completed_audio_file = cursor.getString(completed_audio_fileIndex);
+                	workoutsFreq.archive = cursor.getString(archiveIndex);
+                    
+                    lastFreqs.add(workoutsFreq);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+		
+		return lastFreqs;
+	}
+	
+	
 
 }

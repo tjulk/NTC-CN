@@ -34,6 +34,17 @@ public class NtcApplication extends Application {
 		super.onCreate();
 		_instance = this;
 		
+		getZipFileFromSDcard();
+		
+        InitDataControl.getInstance(this).init();
+	}
+
+	public static NtcApplication getInstance() {
+		return _instance;
+	}
+	
+	//获取压缩包
+	private void getZipFileFromSDcard() {
         try {
         	zipFile = new ZipFile(zipPath);
 			Enumeration<ZipEntry> en=(Enumeration<ZipEntry>) zipFile.entries();
@@ -51,12 +62,6 @@ public class NtcApplication extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-        InitDataControl.getInstance(this).init();
-	}
-
-	public static NtcApplication getInstance() {
-		return _instance;
 	}
 	
 }

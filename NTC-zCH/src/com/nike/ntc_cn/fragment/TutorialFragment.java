@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.nike.ntc_cn.R;
 import com.nike.ntc_cn.TutorialLevelActivity;
+import com.nike.ntc_cn.TutorialListActivity;
 
 public class TutorialFragment extends Fragment implements OnClickListener {
   public static final String TAG = TutorialFragment.class.getSimpleName();
@@ -51,22 +51,31 @@ public class TutorialFragment extends Fragment implements OnClickListener {
 
 @Override
 public void onClick(View v) {
+	Intent intent;
 	switch (v.getId()) {
 	case R.id.getlean_btn:
-		startActivity(new Intent(getActivity(), TutorialLevelActivity.class));
+		intent = new Intent(getActivity(), TutorialLevelActivity.class);
+		intent.putExtra(TutorialLevelActivity.TAG_TUTORIAL_GOAL, TutorialLevelActivity.GOAL_GETLEAN);
+		startActivity(intent);
 		break;
 	case R.id.gettoned_btn:
-		startActivity(new Intent(getActivity(), TutorialLevelActivity.class));
+		intent = new Intent(getActivity(), TutorialLevelActivity.class);
+		intent.putExtra(TutorialLevelActivity.TAG_TUTORIAL_GOAL, TutorialLevelActivity.GOAL_GETTONED);
+		startActivity(intent);
 		break;
 	case R.id.getstrong_btn:
-		startActivity(new Intent(getActivity(), TutorialLevelActivity.class));
+		intent = new Intent(getActivity(), TutorialLevelActivity.class);
+		intent.putExtra(TutorialLevelActivity.TAG_TUTORIAL_GOAL, TutorialLevelActivity.GOAL_GETSTRONG);
+		startActivity(intent);
 		break;
 	case R.id.getfocused_btn:
-		startActivity(new Intent(getActivity(), TutorialLevelActivity.class));
-		break;
-		
-	default:
+		intent = new Intent(getActivity(), TutorialListActivity.class);
+		intent.putExtra(TutorialLevelActivity.TAG_TUTORIAL_GOAL, TutorialLevelActivity.GOAL_FOCOUS);
+		startActivity(intent);
 		break;
 	}
+	
+
+	
 }
 }

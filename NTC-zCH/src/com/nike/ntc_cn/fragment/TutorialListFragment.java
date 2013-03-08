@@ -38,7 +38,7 @@ public class TutorialListFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
 
-    final View v = inflater.inflate(R.layout.about, container, false);
+    final View v = inflater.inflate(R.layout.tutorial_list, container, false);
 
 		// v.findViewById(R.id.play).setOnClickListener(new
 		// View.OnClickListener() {

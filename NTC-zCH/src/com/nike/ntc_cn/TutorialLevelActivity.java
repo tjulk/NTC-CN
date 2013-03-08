@@ -8,6 +8,25 @@ import android.widget.LinearLayout;
 
 
 public class TutorialLevelActivity extends BaseActivity implements OnClickListener {
+	
+	
+	 public static final String TAG_TUTORIAL_GOAL = "TAG_TUTORIAL_GOAL";
+	 public static final String TAG_TUTORIAL_LEVEL = "TAG_TUTORIAL_LEVEL";
+	
+	 
+	  public static final String GOAL_NONE = "none";
+	  public static final String GOAL_GETLEAN = "lean";
+	  public static final String GOAL_GETTONED = "tone";
+	  public static final String GOAL_GETSTRONG = "string";
+	  public static final String GOAL_FOCOUS = "focused";
+	 
+	  public static final String LEVEL_NONE = "none";
+	  public static final String LEVEL_PRIMARY = "beginner";
+	  public static final String LEVEL_MIDDLE = "intermediate";
+	  public static final String LEVEL_HIGH = "advanced";
+
+	  private String mTutorialGoal = GOAL_GETLEAN;
+	  private String mTutorialLevel = LEVEL_PRIMARY;
 
 	  private LinearLayout mPrimaryBtn;
 	  private LinearLayout mMiddleBtn;
@@ -18,7 +37,8 @@ public class TutorialLevelActivity extends BaseActivity implements OnClickListen
 		overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.tutorial_level);
-	    setTitle("瘦身");
+	    
+	    mTutorialGoal = getIntent().getStringExtra(TAG_TUTORIAL_GOAL);
 	    
 	    mPrimaryBtn = (LinearLayout)findViewById(R.id.primary_btn);
 	    mMiddleBtn = (LinearLayout)findViewById(R.id.middle_btn);
@@ -37,20 +57,22 @@ public class TutorialLevelActivity extends BaseActivity implements OnClickListen
 
 	@Override
 	public void onClick(View v) {
+		Intent intent;
 		switch (v.getId()) {
 		case R.id.primary_btn:
-			startActivity(new Intent(this, TutorialListActivity.class));
+			mTutorialLevel = LEVEL_PRIMARY;
 			break;
 		case R.id.middle_btn:
-			startActivity(new Intent(this, TutorialListActivity.class));
+			mTutorialLevel = LEVEL_MIDDLE;
 			break;
 		case R.id.high_btn:
-			startActivity(new Intent(this, TutorialListActivity.class));
-			break;
-			
-		default:
+			mTutorialLevel = LEVEL_HIGH;			
 			break;
 		}		
+		intent = new Intent(this, TutorialListActivity.class);
+		intent.putExtra(TAG_TUTORIAL_GOAL, mTutorialGoal);
+		intent.putExtra(TAG_TUTORIAL_LEVEL, mTutorialLevel);
+		startActivity(intent);
 	}	
 	
 
