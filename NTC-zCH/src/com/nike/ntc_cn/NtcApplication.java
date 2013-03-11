@@ -48,6 +48,7 @@ public class NtcApplication extends Application {
         try {
         	zipFile = new ZipFile(zipPath);
 			Enumeration<ZipEntry> en=(Enumeration<ZipEntry>) zipFile.entries();
+			
 		      ZipEntry entry = null;
 		      zipfileList = new ArrayList<ZipEntry>();
 		        while (en.hasMoreElements()) {
@@ -58,6 +59,12 @@ public class NtcApplication extends Application {
 		            }
 		        }
 		        Log.d(TAG,"total files "+ zipfileList.size());
+		        
+		        for (int i=0;i<zipfileList.size();i++) {
+		        	System.out.println("==================================" + zipfileList.get(i).getName());
+		        }
+		        
+		        
 			
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -6,13 +6,13 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-import com.nike.ntc_cn.TutorialLevelActivity;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+
+import com.nike.ntc_cn.TutorialLevelActivity;
+import com.nike.ntc_cn.db.T_ExerciseControl.M_Exercises;
 
 public final class T_WorkoutControl extends DBControl{
 	
@@ -35,13 +35,17 @@ public final class T_WorkoutControl extends DBControl{
 		public String equipment;
 		public String completed_audio_file;
 		public String archive;
+		
+		public List<M_Exercises> exercisesList;
+		
 		@Override
 		public String toString() {
 			return "M_Workouts [_id=" + _id + ", name=" + name + ", title="
 					+ title + ", goal=" + goal + ", level=" + level
 					+ ", duration=" + duration + ", equipment=" + equipment
 					+ ", completed_audio_file=" + completed_audio_file
-					+ ", archive=" + archive + "]";
+					+ ", archive=" + archive + ", exercisesList="
+					+ exercisesList + "]";
 		}
 	}
 
@@ -91,7 +95,7 @@ public final class T_WorkoutControl extends DBControl{
         return instance;
     }
 	
-
+	//获取workout列表
 	public List<M_Workouts> getWorkoutsList(String goal, String level) {
 		List<M_Workouts> lastFreqs = new ArrayList<M_Workouts>();
 		SQLiteDatabase db =  mOpenHelper.getReadableDatabase();
@@ -123,6 +127,8 @@ public final class T_WorkoutControl extends DBControl{
                 	workoutsFreq.equipment = cursor.getString(equipmentIndex);
                 	workoutsFreq.completed_audio_file = cursor.getString(completed_audio_fileIndex);
                 	workoutsFreq.archive = cursor.getString(archiveIndex);
+                	
+                	workoutsFreq.exercisesList = T_WorkoutExercisesControl.getInstance(mContext).getExercisesListByWorkoutname(workoutsFreq.name);
                     
                     lastFreqs.add(workoutsFreq);
                 } while (cursor.moveToNext());

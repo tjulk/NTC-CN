@@ -3,22 +3,34 @@ package com.nike.ntc_cn.utils;
 import java.io.IOException;
 
 import com.nike.ntc_cn.NtcApplication;
+import com.nike.ntc_cn.db.T_ExercisePagesControl.M_ExercisePages;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
 //各种工具
-public class Utils {
+public  class Utils {
 	
 	//获取压缩包中的图片
-    public Bitmap createBitmap() {
+    public static Bitmap createBitmap(int i) {
         Bitmap result = null;
         try {
             result = new BitmapDrawable(NtcApplication.getInstance().zipFile.getInputStream(NtcApplication.getInstance().zipfileList
-                    .get(770))).getBitmap();
+                    .get(i))).getBitmap();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return result;
     }
+
+	public static Bitmap createBitmapByName(String name) {
+		
+        for (int i=0;i<NtcApplication.getInstance().zipfileList.size();i++) {
+        	if (NtcApplication.getInstance().zipfileList.get(i).getName().equals("images/"+name+".jpg")){
+        		return createBitmap(i);
+        	}
+        }
+		
+		return null;
+	}
 }

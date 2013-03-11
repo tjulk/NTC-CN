@@ -1,11 +1,16 @@
 package com.nike.ntc_cn.db;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.nike.ntc_cn.db.T_ExercisePagesControl.M_ExercisePages;
 
 public final class T_ExerciseControl extends DBControl{
 	/****************************************************************************************************************************/
@@ -46,13 +51,28 @@ public final class T_ExerciseControl extends DBControl{
 		public String name;
 		public String title;
 		public int duration;
-		public String quipment;
+		public String equipment;
 		public String footnote;
 		public String thumbnail_medium;
 		public String thumbnail_small;
 		public String video_extension;
 		public String video_name;
 		public String archive;
+		
+		public List<M_ExercisePages> exercisePages;
+
+		@Override
+		public String toString() {
+			return "M_Exercises [_id=" + _id + ", name=" + name + ", title="
+					+ title + ", duration=" + duration + ", equipment="
+					+ equipment + ", footnote=" + footnote
+					+ ", thumbnail_medium=" + thumbnail_medium
+					+ ", thumbnail_small=" + thumbnail_small
+					+ ", video_extension=" + video_extension + ", video_name="
+					+ video_name + ", archive=" + archive + ", exercisePages="
+					+ exercisePages + "]";
+		}
+		
 	}
 	
 	
@@ -75,6 +95,45 @@ public final class T_ExerciseControl extends DBControl{
         }
         return instance;
     }
+	
+	public M_Exercises getExercisesByName(String name) {
+		SQLiteDatabase db =  mOpenHelper.getReadableDatabase();
+        final Cursor cursor = db.query(Exercises.TABLE_NAME, Exercises.COLUMNS, " name = '" + name + "'", null, null, null, null);
+        M_Exercises exercises = null;
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+            	exercises = new M_Exercises();
+                int idIndex = cursor.getColumnIndex(Exercises._id.name());
+                int nameIndex = cursor.getColumnIndex(Exercises.name.name());
+                int titleIndex = cursor.getColumnIndex(Exercises.title.name());
+                int durationIndex = cursor.getColumnIndex(Exercises.duration.name());
+                int equipmentIndex = cursor.getColumnIndex(Exercises.equipment.name());
+                int footnoteIndex = cursor.getColumnIndex(Exercises.footnote.name());
+                int thumbnail_mediumIndex = cursor.getColumnIndex(Exercises.thumbnail_medium.name());
+                int thumbnail_smallIndex = cursor.getColumnIndex(Exercises.thumbnail_small.name());
+                int video_extensionIndex = cursor.getColumnIndex(Exercises.video_extension.name());
+                int video_nameIndex = cursor.getColumnIndex(Exercises.video_name.name());
+                int archiveIndex = cursor.getColumnIndex(Exercises.archive.name());
+  
+                exercises._id = cursor.getInt(idIndex);
+                exercises.name = cursor.getString(nameIndex);
+                exercises.title = cursor.getString(titleIndex);
+                exercises.duration = cursor.getInt(durationIndex);
+                exercises.equipment = cursor.getString(equipmentIndex);
+                exercises.footnote = cursor.getString(footnoteIndex);
+                exercises.thumbnail_medium = cursor.getString(thumbnail_mediumIndex);
+                exercises.thumbnail_small = cursor.getString(thumbnail_smallIndex);
+                exercises.video_extension = cursor.getString(video_extensionIndex);
+                exercises.video_name = cursor.getString(video_nameIndex);
+                exercises.archive = cursor.getString(archiveIndex);
+                
+                exercises.exercisePages = T_ExercisePagesControl.getInstance(mContext).getExercisePagesByExerciseName(name);
+            }
+            cursor.close();
+        }
+		
+		return exercises;
+	}
 	
 	
 }

@@ -2,12 +2,16 @@ package com.nike.ntc_cn;
 
 import java.util.List;
 
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Gallery;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.TextView;
+import android.widget.SpinnerAdapter;
 
+import com.nike.ntc_cn.adapter.WorkoutExercisesAdapter;
 import com.nike.ntc_cn.db.T_WorkoutControl;
 import com.nike.ntc_cn.db.T_WorkoutControl.M_Workouts;
 
@@ -51,13 +55,22 @@ public class TutorialListActivity extends BaseActivity{
 		lp.setMargins(10, 10, 10, 10);
 		
 		for (int i=0;i < list.size(); i++) {
-			TextView tv = new TextView(this);
+//			TextView tv = new TextView(this);
+//			int randomIndex = i%TUTORIAL_LIST_BACKGROUND.length;
+//			tv.setBackgroundResource(TUTORIAL_LIST_BACKGROUND[randomIndex]);
+//			tv.setLayoutParams(lp);
+//			tv.setText(list.get(i).title);
+//			tv.setVisibility(View.INVISIBLE);
+			
+			final WorkoutExercisesAdapter adapter = new WorkoutExercisesAdapter(this, list.get(i).exercisesList);
+			Gallery gallery = new Gallery(this);
+			gallery.setAdapter(adapter);
 			int randomIndex = i%TUTORIAL_LIST_BACKGROUND.length;
-			tv.setBackgroundResource(TUTORIAL_LIST_BACKGROUND[randomIndex]);
-			tv.setLayoutParams(lp);
-			tv.setText(list.get(i).name);
-			tv.setVisibility(View.INVISIBLE);
-			tutorial_list.addView(tv);
+			gallery.setBackgroundResource(TUTORIAL_LIST_BACKGROUND[randomIndex]);
+			//gallery.setLayoutParams(lp);
+			gallery.setVisibility(View.INVISIBLE);
+			
+			tutorial_list.addView(gallery);
 		}
 		
 	}
