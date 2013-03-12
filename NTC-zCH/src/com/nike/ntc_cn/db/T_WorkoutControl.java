@@ -99,9 +99,13 @@ public final class T_WorkoutControl extends DBControl{
 	public List<M_Workouts> getWorkoutsList(String goal, String level) {
 		List<M_Workouts> lastFreqs = new ArrayList<M_Workouts>();
 		SQLiteDatabase db =  mOpenHelper.getReadableDatabase();
+		
+		db.beginTransaction();
+		
+		
 		String selection = ("goal = '" + goal + "' and level = '" + level + "'");
 		if (goal.equals(TutorialLevelActivity.GOAL_FOCOUS))
-			selection = ("goal = '" + goal + "'");
+			selection = ("goal = '" + goal + "' and level = ''");
 		
 		Cursor  cursor = db.query(Workouts.TABLE_NAME,Workouts.COLUMNS, selection , null, null, null, null);
         if (cursor != null) {
@@ -128,13 +132,16 @@ public final class T_WorkoutControl extends DBControl{
                 	workoutsFreq.completed_audio_file = cursor.getString(completed_audio_fileIndex);
                 	workoutsFreq.archive = cursor.getString(archiveIndex);
                 	
-                	workoutsFreq.exercisesList = T_WorkoutExercisesControl.getInstance(mContext).getExercisesListByWorkoutname(workoutsFreq.name);
+                	//workoutsFreq.exercisesList = T_WorkoutExercisesControl.getInstance(mContext).getExercisesListByWorkoutname(workoutsFreq.name);
                     
                     lastFreqs.add(workoutsFreq);
                 } while (cursor.moveToNext());
             }
             cursor.close();
         }
+        
+        
+        db.endTransaction();
 		
 		return lastFreqs;
 	}

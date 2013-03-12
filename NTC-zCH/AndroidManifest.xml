@@ -39,6 +39,7 @@
         </activity>
         <activity android:name=".TutorialLevelActivity"/>
         <activity android:name=".TutorialListActivity"/>
+        <activity android:name=".TutorialDetailActivity"/>
     </application>
 
 </manifest>

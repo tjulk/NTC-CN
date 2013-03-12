@@ -17,7 +17,7 @@ public class TutorialLevelActivity extends BaseActivity implements OnClickListen
 	  public static final String GOAL_NONE = "none";
 	  public static final String GOAL_GETLEAN = "lean";
 	  public static final String GOAL_GETTONED = "tone";
-	  public static final String GOAL_GETSTRONG = "string";
+	  public static final String GOAL_GETSTRONG = "strong";
 	  public static final String GOAL_FOCOUS = "focused";
 	 
 	  public static final String LEVEL_NONE = "none";

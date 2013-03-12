@@ -1,16 +1,21 @@
 package com.nike.ntc_cn;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import com.nike.ntc_cn.db.InitDataControl;
-
 import android.app.Application;
 import android.util.Log;
+
+import com.nike.ntc_cn.db.InitDataControl;
 
 public class NtcApplication extends Application {
 	
@@ -34,6 +39,8 @@ public class NtcApplication extends Application {
 		super.onCreate();
 		_instance = this;
 		
+        mLowMemoryListeners = new ArrayList<WeakReference<OnLowMemoryListener>>();
+        
 		getZipFileFromSDcard();
 		
         InitDataControl.getInstance(this).init();
@@ -70,5 +77,85 @@ public class NtcApplication extends Application {
 			e.printStackTrace();
 		}
 	}
+    
+    private ExecutorService mExecutorService;
+    
+    private ArrayList<WeakReference<OnLowMemoryListener>> mLowMemoryListeners;
+    
+    private static final int CORE_POOL_SIZE = 5;
+
+    private static final ThreadFactory sThreadFactory = new ThreadFactory() {
+        private final AtomicInteger mCount = new AtomicInteger(1);
+
+        public Thread newThread(Runnable r) {
+            return new Thread(r, "GreenDroid thread #" + mCount.getAndIncrement());
+        }
+    };
+    
+ 
+    
+    public ExecutorService getExecutor() {
+        if (mExecutorService == null) {
+            mExecutorService = Executors.newFixedThreadPool(CORE_POOL_SIZE, sThreadFactory);
+        }
+        return mExecutorService;
+    }
+
+    public static interface OnLowMemoryListener {
+        
+        /**
+         * Callback to be invoked when the system needs memory.
+         */
+        public void onLowMemoryReceived();
+    }
+    
+    
+    /**
+     * Add a new listener to registered {@link OnLowMemoryListener}.
+     * 
+     * @param listener The listener to unregister
+     * @see OnLowMemoryListener
+     */
+    public void registerOnLowMemoryListener(OnLowMemoryListener listener) {
+        if (listener != null) {
+            mLowMemoryListeners.add(new WeakReference<OnLowMemoryListener>(listener));
+        }
+    }
+
+    /**
+     * Remove a previously registered listener
+     * 
+     * @param listener The listener to unregister
+     * @see OnLowMemoryListener
+     */
+    public void unregisterOnLowMemoryListener(OnLowMemoryListener listener) {
+        if (listener != null) {
+            int i = 0;
+            while (i < mLowMemoryListeners.size()) {
+                final OnLowMemoryListener l = mLowMemoryListeners.get(i).get();
+                if (l == null || l == listener) {
+                    mLowMemoryListeners.remove(i);
+                } else {
+                    i++;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        int i = 0;
+        while (i < mLowMemoryListeners.size()) {
+            final OnLowMemoryListener listener = mLowMemoryListeners.get(i).get();
+            if (listener == null) {
+                mLowMemoryListeners.remove(i);
+            } else {
+                listener.onLowMemoryReceived();
+                i++;
+            }
+        }
+        
+    }
 	
 }

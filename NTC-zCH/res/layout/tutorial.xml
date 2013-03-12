@@ -41,7 +41,7 @@
         android:layout_height="fill_parent"
         android:layout_margin="5dip"
         android:layout_weight="1"
-        android:background="@drawable/bg_tacos"
+        android:background="@drawable/panel_bg_selector"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="10dip" >
@@ -65,7 +65,7 @@
         android:layout_height="fill_parent"
         android:layout_margin="5dip"
         android:layout_weight="1"
-        android:background="@drawable/bg_tacos"
+        android:background="@drawable/panel_bg_selector"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="10dip" >
@@ -89,7 +89,7 @@
         android:layout_height="fill_parent"
         android:layout_margin="5dip"
         android:layout_weight="1"
-        android:background="@drawable/bg_tacos"
+        android:background="@drawable/panel_bg_selector"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="10dip" >
@@ -113,7 +113,7 @@
         android:layout_height="fill_parent"
         android:layout_margin="5dip"
         android:layout_weight="1"
-        android:background="@drawable/bg_tacos"
+        android:background="@drawable/panel_bg_selector"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="10dip" >

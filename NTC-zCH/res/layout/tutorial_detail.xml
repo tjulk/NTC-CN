@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2012 Steven Rudenko
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- 
+<com.nike.ntc_cn.googleplus.VerticalGooglePlusLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@android:color/white" >
+
+	<LinearLayout
+	    android:id="@+id/tutorial_list"
+        style="@style/root_style"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</com.nike.ntc_cn.googleplus.VerticalGooglePlusLayout>
+ -->
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+     
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="65dip"
+        android:orientation="vertical">
+        <TextView android:id="@+id/tutorial_detail_title"
+            android:layout_width="fill_parent"
+            android:layout_height="35dip"        
+            android:layout_weight="1"
+            android:textSize="18dip"
+            android:gravity="center|bottom"
+            android:text="瘦身/初级/30分钟"
+            />
+        <TextView android:id="@+id/tutorial_detail_description"
+            android:layout_width="fill_parent"
+            android:layout_height="35dip"  
+            android:layout_weight="1"
+            android:gravity="center|top"
+            android:text="No equipment required for this workout"
+            />
+    </LinearLayout> 
+     
+    <ListView 	    
+        android:id="@+id/tutorial_detail_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:animationCache="false"
+        android:layout_weight="1"
+        android:divider="#E5E5E5"
+        android:dividerHeight="1dip"
+        android:scrollbars="none" />
+    
+    
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="55dip"
+        android:orientation="horizontal"
+        android:padding="5dip"
+        >
+            <Button 
+            android:id="@+id/music_btn"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"        
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="18dip"
+            android:background="@drawable/last_play_clear_btn_selector"
+            android:text="设置音乐"
+            />        
+            <Button 
+                android:id="@+id/start_btn"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"        
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="18dip"
+            android:background="@drawable/last_play_clear_btn_selector"
+            android:text="开始健身"
+            />
+    </LinearLayout>
+     
+ </LinearLayout>

@@ -27,5 +27,15 @@
         <attr name="maskDrawable" format="reference" />
         <attr name="borderDrawable" format="reference" />
     </declare-styleable>
-
+    
+	<declare-styleable name="AsyncImageView">
+		<attr name="defaultSrc" format="reference" />
+		<attr name="url" format="string" />
+		<attr name="inDensity">
+			<enum name="ldpi" value="120" />
+			<enum name="mdpi" value="160" />
+			<enum name="hdpi" value="240" />
+			<enum name="xhdpi" value="320" />
+		</attr>
+	</declare-styleable>
 </resources>

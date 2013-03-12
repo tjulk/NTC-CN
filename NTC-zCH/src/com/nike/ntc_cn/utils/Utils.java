@@ -1,6 +1,7 @@
 package com.nike.ntc_cn.utils;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import com.nike.ntc_cn.NtcApplication;
 import com.nike.ntc_cn.db.T_ExercisePagesControl.M_ExercisePages;
@@ -32,5 +33,20 @@ public  class Utils {
         }
 		
 		return null;
+	}
+	
+	public static InputStream getInputStreamByName(String name) {
+		
+        for (int i=0;i<NtcApplication.getInstance().zipfileList.size();i++) {
+        	if (NtcApplication.getInstance().zipfileList.get(i).getName().equals(name)){
+        		try {
+					return NtcApplication.getInstance().zipFile.getInputStream(NtcApplication.getInstance().zipfileList.get(i));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+        	}
+        }
+        
+        return null;
 	}
 }

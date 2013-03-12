@@ -3,10 +3,14 @@ package com.nike.ntc_cn.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Gallery;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nike.ntc_cn.R;
@@ -15,12 +19,12 @@ import com.nike.ntc_cn.db.T_WorkoutControl.M_Workouts;
 public class TutorialListAdapter extends BaseAdapter{
 	protected LayoutInflater mInflater = null;
 	private List<M_Workouts> list = null;
-	//private Context mContext;
+	private Context mContext;
 	
 	public TutorialListAdapter(Context context, List<M_Workouts> list) {
 		this.list = list;
 		mInflater = LayoutInflater.from(context);
-		//mContext = context;
+		mContext = context;
 	}
 
 	@Override
@@ -40,25 +44,35 @@ public class TutorialListAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder viewHolder = null;
+		ViewHolder holder = null;
 		final M_Workouts workout = list.get(position);
 		if (null == convertView) {
-			viewHolder = new ViewHolder();
+			holder = new ViewHolder();
 			convertView = mInflater.inflate(R.layout.tutorial_list_item, null);
-			viewHolder.name = (TextView) convertView.findViewById(R.id.workout_name);
-			convertView.setTag(viewHolder);
+            holder.itemOrder = (TextView) convertView.findViewById(R.id.itemOrder);
+            holder.itemName = (TextView) convertView.findViewById(R.id.itemName);
+            holder.itemNumber = (TextView) convertView.findViewById(R.id.itemNumber);
+            holder.mSearchRankingItemLayout = (RelativeLayout) convertView.findViewById(R.id.searchranking_item_layout);
+            convertView.setTag(holder);
 		}
 		else
-			viewHolder = (ViewHolder) convertView.getTag();
+			holder = (ViewHolder) convertView.getTag();
   
-		viewHolder.name.setText(workout.name);
+        holder.itemOrder.setText(""+(position+1));
+        holder.itemName.setText(workout.title);
+        holder.itemNumber.setText(workout.duration+" 分");
+        int oneOrTwo = ((position%2)==0)?R.drawable.searchranking_selector_2:R.drawable.searchranking_selector_1;
+        holder.mSearchRankingItemLayout.setBackgroundResource(oneOrTwo);
 		
 		return convertView;
 	}
 
 	public final class ViewHolder
 	{
-		public TextView name = null;
+        public TextView itemOrder;
+        public TextView itemName;
+        public TextView itemNumber;
+        public RelativeLayout mSearchRankingItemLayout;
 	}
 	
  

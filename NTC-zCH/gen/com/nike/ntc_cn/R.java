@@ -84,6 +84,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int content_layout=0x7f010006;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int defaultSrc=0x7f010012;
         /**  Max fade value. 
          <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -116,6 +120,19 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int fling_duration=0x7f01000a;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>ldpi</code></td><td>120</td><td></td></tr>
+<tr><td><code>mdpi</code></td><td>160</td><td></td></tr>
+<tr><td><code>hdpi</code></td><td>240</td><td></td></tr>
+<tr><td><code>xhdpi</code></td><td>320</td><td></td></tr>
+</table>
+         */
+        public static final int inDensity=0x7f010014;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -182,6 +199,14 @@ containing a value of this type.
 </table>
          */
         public static final int swiping_type=0x7f010002;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int url=0x7f010013;
     }
     public static final class bool {
         public static final int default_pref_show_shadow=0x7f0c0000;
@@ -254,68 +279,90 @@ containing a value of this type.
         public static final int ic_nav_myphotos=0x7f020028;
         public static final int ic_nav_profile=0x7f020029;
         public static final int item_background_holo_light=0x7f02002a;
-        public static final int list_focused_holo=0x7f02002b;
-        public static final int list_longpressed_holo=0x7f02002c;
-        public static final int list_pressed_holo_light=0x7f02002d;
-        public static final int list_selector_background_transition_holo_light=0x7f02002e;
-        public static final int list_selector_disabled_holo_light=0x7f02002f;
-        public static final int progress_bg_holo_light=0x7f020030;
-        public static final int progress_horizontal_holo_light=0x7f020031;
-        public static final int progress_primary_holo_light=0x7f020032;
-        public static final int progress_secondary_holo_light=0x7f020033;
-        public static final int shadow=0x7f020034;
+        public static final int last_play_clear_btn_nomal=0x7f02002b;
+        public static final int last_play_clear_btn_selected=0x7f02002c;
+        public static final int last_play_clear_btn_selector=0x7f02002d;
+        public static final int list_focused_holo=0x7f02002e;
+        public static final int list_longpressed_holo=0x7f02002f;
+        public static final int list_pressed_holo_light=0x7f020030;
+        public static final int list_selector_background_transition_holo_light=0x7f020031;
+        public static final int list_selector_disabled_holo_light=0x7f020032;
+        public static final int panel_bg_selector=0x7f020033;
+        public static final int progress_bg_holo_light=0x7f020034;
+        public static final int progress_horizontal_holo_light=0x7f020035;
+        public static final int progress_primary_holo_light=0x7f020036;
+        public static final int progress_secondary_holo_light=0x7f020037;
+        public static final int searchranking_item_seleccted=0x7f020038;
+        public static final int searchranking_selector_1=0x7f020039;
+        public static final int searchranking_selector_2=0x7f02003a;
+        public static final int shadow=0x7f02003b;
+        public static final int zagat_explanation_ok_button_default=0x7f02003c;
+        public static final int zagat_explanation_ok_button_pressed=0x7f02003d;
     }
     public static final class id {
-        public static final int actionbar_compat=0x7f060008;
-        public static final int actionbar_compat_item_refresh=0x7f06000b;
-        public static final int actionbar_compat_item_refresh_progress=0x7f06000a;
-        public static final int actionbar_compat_title=0x7f060009;
+        public static final int actionbar_compat=0x7f06000c;
+        public static final int actionbar_compat_item_refresh=0x7f06000f;
+        public static final int actionbar_compat_item_refresh_progress=0x7f06000e;
+        public static final int actionbar_compat_title=0x7f06000d;
         public static final int actions=0x7f060003;
-        public static final int actionsContentView=0x7f06000f;
+        public static final int actionsContentView=0x7f060013;
         public static final int actions_width=0x7f060001;
         public static final int both=0x7f060005;
-        public static final int bottomBar=0x7f06000e;
+        public static final int bottomBar=0x7f060012;
         public static final int content=0x7f060004;
-        public static final int divider=0x7f06000d;
+        public static final int divider=0x7f060011;
         public static final int edge=0x7f060007;
+        public static final int exercise_page=0x7f06003c;
         public static final int full=0x7f060006;
-        public static final int getfocused_btn=0x7f060028;
-        public static final int getlean_btn=0x7f060025;
-        public static final int getstrong_btn=0x7f060027;
-        public static final int gettoned_btn=0x7f060026;
-        public static final int high_btn=0x7f06002b;
-        public static final int menu_refresh=0x7f06000c;
-        public static final int menu_search=0x7f060030;
-        public static final int menu_share=0x7f060031;
-        public static final int middle_btn=0x7f06002a;
+        public static final int getfocused_btn=0x7f06002c;
+        public static final int getlean_btn=0x7f060029;
+        public static final int getstrong_btn=0x7f06002b;
+        public static final int gettoned_btn=0x7f06002a;
+        public static final int hdpi=0x7f06000a;
+        public static final int high_btn=0x7f060038;
+        public static final int itemName=0x7f060034;
+        public static final int itemNumber=0x7f060035;
+        public static final int itemOrder=0x7f060033;
+        public static final int ldpi=0x7f060008;
+        public static final int mdpi=0x7f060009;
+        public static final int menu_refresh=0x7f060010;
+        public static final int menu_search=0x7f06003d;
+        public static final int menu_share=0x7f06003e;
+        public static final int middle_btn=0x7f060037;
+        public static final int music_btn=0x7f060030;
         public static final int none=0x7f060002;
-        public static final int prefFadeMaxValue=0x7f060012;
-        public static final int prefFadeMaxValueValue=0x7f060013;
-        public static final int prefFadeType=0x7f060010;
-        public static final int prefFadeTypeValue=0x7f060011;
-        public static final int prefFlingDuration=0x7f060014;
-        public static final int prefFlingDurationValue=0x7f060015;
-        public static final int prefShadowWidth=0x7f060018;
-        public static final int prefShadowWidthValue=0x7f060019;
-        public static final int prefShowShadow=0x7f060016;
-        public static final int prefShowShadowValue=0x7f060017;
-        public static final int prefSpacingActionsWidth=0x7f06001f;
-        public static final int prefSpacingActionsWidthValue=0x7f060020;
-        public static final int prefSpacingType=0x7f06001a;
-        public static final int prefSpacingTypeValue=0x7f06001b;
-        public static final int prefSpacingWidth=0x7f06001c;
-        public static final int prefSpacingWidthAdditionalValue=0x7f06001d;
-        public static final int prefSpacingWidthValue=0x7f06001e;
-        public static final int prefSwipingEdgeWidth=0x7f060023;
-        public static final int prefSwipingEdgeWidthValue=0x7f060024;
-        public static final int prefSwipingType=0x7f060021;
-        public static final int prefSwipingTypeValue=0x7f060022;
-        public static final int primary_btn=0x7f060029;
-        public static final int progress=0x7f06002f;
+        public static final int prefFadeMaxValue=0x7f060016;
+        public static final int prefFadeMaxValueValue=0x7f060017;
+        public static final int prefFadeType=0x7f060014;
+        public static final int prefFadeTypeValue=0x7f060015;
+        public static final int prefFlingDuration=0x7f060018;
+        public static final int prefFlingDurationValue=0x7f060019;
+        public static final int prefShadowWidth=0x7f06001c;
+        public static final int prefShadowWidthValue=0x7f06001d;
+        public static final int prefShowShadow=0x7f06001a;
+        public static final int prefShowShadowValue=0x7f06001b;
+        public static final int prefSpacingActionsWidth=0x7f060023;
+        public static final int prefSpacingActionsWidthValue=0x7f060024;
+        public static final int prefSpacingType=0x7f06001e;
+        public static final int prefSpacingTypeValue=0x7f06001f;
+        public static final int prefSpacingWidth=0x7f060020;
+        public static final int prefSpacingWidthAdditionalValue=0x7f060021;
+        public static final int prefSpacingWidthValue=0x7f060022;
+        public static final int prefSwipingEdgeWidth=0x7f060027;
+        public static final int prefSwipingEdgeWidthValue=0x7f060028;
+        public static final int prefSwipingType=0x7f060025;
+        public static final int prefSwipingTypeValue=0x7f060026;
+        public static final int primary_btn=0x7f060036;
+        public static final int progress=0x7f06003b;
         public static final int right_offset=0x7f060000;
-        public static final int tutorial_list=0x7f06002c;
-        public static final int webview=0x7f06002e;
-        public static final int workout_name=0x7f06002d;
+        public static final int searchranking_item_layout=0x7f060032;
+        public static final int start_btn=0x7f060031;
+        public static final int tutorial_detail_description=0x7f06002e;
+        public static final int tutorial_detail_list=0x7f06002f;
+        public static final int tutorial_detail_title=0x7f06002d;
+        public static final int tutorial_list=0x7f060039;
+        public static final int webview=0x7f06003a;
+        public static final int xhdpi=0x7f06000b;
     }
     public static final class integer {
         public static final int config_roate_time=0x7f080005;
@@ -353,10 +400,13 @@ containing a value of this type.
         public static final int pref_swiping=0x7f03000b;
         public static final int sandbox=0x7f03000c;
         public static final int tutorial=0x7f03000d;
-        public static final int tutorial_level=0x7f03000e;
-        public static final int tutorial_list=0x7f03000f;
-        public static final int tutorial_list_item=0x7f030010;
-        public static final int webview=0x7f030011;
+        public static final int tutorial_detail=0x7f03000e;
+        public static final int tutorial_detail_list_item=0x7f03000f;
+        public static final int tutorial_level=0x7f030010;
+        public static final int tutorial_list=0x7f030011;
+        public static final int tutorial_list_item=0x7f030012;
+        public static final int webview=0x7f030013;
+        public static final int workout_exercises_list_item=0x7f030014;
     }
     public static final class menu {
         public static final int main=0x7f0e0000;
@@ -704,6 +754,66 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name android:actionbarCompatTitleStyle
         */
         public static final int AppTheme_actionbarCompatTitleStyle = 0;
+        /** Attributes that can be used with a AsyncImageView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #AsyncImageView_defaultSrc com.nike.ntc_cn:defaultSrc}</code></td><td></td></tr>
+           <tr><td><code>{@link #AsyncImageView_inDensity com.nike.ntc_cn:inDensity}</code></td><td></td></tr>
+           <tr><td><code>{@link #AsyncImageView_url com.nike.ntc_cn:url}</code></td><td></td></tr>
+           </table>
+           @see #AsyncImageView_defaultSrc
+           @see #AsyncImageView_inDensity
+           @see #AsyncImageView_url
+         */
+        public static final int[] AsyncImageView = {
+            0x7f010012, 0x7f010013, 0x7f010014
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.nike.ntc_cn.R.attr#defaultSrc}
+          attribute's value can be found in the {@link #AsyncImageView} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name android:defaultSrc
+        */
+        public static final int AsyncImageView_defaultSrc = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.nike.ntc_cn.R.attr#inDensity}
+          attribute's value can be found in the {@link #AsyncImageView} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>ldpi</code></td><td>120</td><td></td></tr>
+<tr><td><code>mdpi</code></td><td>160</td><td></td></tr>
+<tr><td><code>hdpi</code></td><td>240</td><td></td></tr>
+<tr><td><code>xhdpi</code></td><td>320</td><td></td></tr>
+</table>
+          @attr name android:inDensity
+        */
+        public static final int AsyncImageView_inDensity = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.nike.ntc_cn.R.attr#url}
+          attribute's value can be found in the {@link #AsyncImageView} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:url
+        */
+        public static final int AsyncImageView_url = 1;
         /** Attributes that can be used with a BezelImageView.
            <p>Includes the following attributes:</p>
            <table>
