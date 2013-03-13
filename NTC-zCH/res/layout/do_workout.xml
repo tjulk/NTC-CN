@@ -13,28 +13,47 @@
             android:layout_height="35dip"        
             android:layout_weight="1"
             android:textSize="18dip"
-            android:gravity="center|bottom"
-            android:text="瘦身/初级/30分钟"
-            />
-        <TextView android:id="@+id/tutorial_detail_description"
-            android:layout_width="fill_parent"
-            android:layout_height="35dip"  
-            android:layout_weight="1"
-            android:gravity="center|top"
-            android:text="No equipment required for this workout"
+            android:gravity="center"
+            android:text="SWEAT+SHAPE"
             />
     </LinearLayout> 
+    
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="WORKOUT RREMAINING"
+        android:gravity="center"
+        android:textColor="@android:color/darker_gray"/>
+    
      
-    <ListView 	    
-        android:id="@+id/tutorial_detail_list"
+    <VideoView 	    
+        android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:animationCache="false"
         android:layout_weight="1"
         android:divider="#E5E5E5"
-        android:dividerHeight="1dip"
-        android:scrollbars="none" />
+        android:layout_margin="1dip"
+         />
     
+    
+     <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+         <View android:background="@color/bottom_bar_text" android:layout_height="1dip"
+             android:layout_width="0dip" android:layout_weight="1"/>
+         
+        <TextView android:id="@+id/tutorial_detail_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"        
+            android:layout_weight="1"
+            android:textSize="16dip"
+            android:gravity="center"
+            android:text=" PRETZEL STRECH"
+            />
+                 <View android:background="@color/divider" android:layout_height="1dip"
+             android:layout_width="0dip" android:layout_weight="1"/>
+    </LinearLayout> 
     
     <LinearLayout android:layout_width="fill_parent"
         android:layout_height="55dip"
@@ -49,7 +68,7 @@
             android:gravity="center"
             android:textSize="18dip"
             android:background="@drawable/last_play_clear_btn_selector"
-            android:text="设置音乐"
+            android:text="结束训练"
             />        
             <Button 
                 android:id="@+id/start_btn"
@@ -59,7 +78,7 @@
             android:layout_weight="1"
             android:textSize="18dip"
             android:background="@drawable/last_play_clear_btn_selector"
-            android:text="开始健身"
+            android:text="暂停训练"
             />
     </LinearLayout>
      

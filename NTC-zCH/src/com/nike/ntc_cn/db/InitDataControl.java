@@ -73,7 +73,6 @@ public final class InitDataControl extends DBControl{
 						}
 						bufferedReader.close();
 						in.close();
-						Log.i(TAG,"=======end  init the databases:" + (System.currentTimeMillis() - start));
 						//db.endTransaction();
 						setInitMode(mContext, true);
 
@@ -81,6 +80,7 @@ public final class InitDataControl extends DBControl{
 					} catch (IOException e) {
 					}
 				}
+				Log.i(TAG,"=======end  init the databases:" + (System.currentTimeMillis() - start));
  
 				return true;
 			}

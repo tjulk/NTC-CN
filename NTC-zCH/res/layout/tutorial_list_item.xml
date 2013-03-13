@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/searchranking_item_layout"
     android:layout_width="fill_parent"
-    android:layout_height="50dip"
+    android:layout_height="55dip"
     android:paddingLeft="13dip"
     android:paddingRight="17dip"
     >
@@ -11,7 +11,7 @@
         android:id="@+id/itemOrder"
         android:layout_alignParentLeft="true"
         android:layout_width="0dip"
-        android:layout_height="50dip"
+        android:layout_height="55dip"
         android:textSize="18dip"
         android:gravity="center"
         android:layout_gravity="center"
@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/itemName"
         android:layout_width="wrap_content"
-        android:layout_height="50dip"
+        android:layout_height="55dip"
         android:layout_toRightOf="@id/itemOrder"
  		android:textSize="18dip"
  		android:gravity="center_vertical"
@@ -32,7 +32,7 @@
     <TextView
         android:id="@+id/itemNumber"
         android:layout_width="wrap_content"
-        android:layout_height="50dip"
+        android:layout_height="55dip"
         android:layout_alignParentRight="true"
         android:textSize="18dip"
         android:gravity="center"
