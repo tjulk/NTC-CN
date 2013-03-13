@@ -56,17 +56,17 @@ public final class InitDataControl extends DBControl{
 		runTransactionAsync(new SQLiteTransaction() {
 			@Override
 			protected boolean performTransaction(SQLiteDatabase db) {
-				
+				long start = System.currentTimeMillis();
+				Log.i(TAG,"=======start  init the databases:" + start);
 				if (!isInitMode(mContext)) {
 					try {
-						long start = System.currentTimeMillis();
-						Log.i(TAG,"=======start  init the databases:" + start);
-						db.beginTransaction();
+						//db.beginTransaction();
 						InputStream in = mContext.getAssets().open("content.sql");
 						BufferedReader bufferedReader = new BufferedReader(
 								new InputStreamReader(in));
 						String sqlUpdate = null;
 						while ((sqlUpdate = bufferedReader.readLine()) != null) {
+							
 							if (!TextUtils.isEmpty(sqlUpdate)) {
 								db.execSQL(sqlUpdate);
 							}
@@ -74,8 +74,7 @@ public final class InitDataControl extends DBControl{
 						bufferedReader.close();
 						in.close();
 						Log.i(TAG,"=======end  init the databases:" + (System.currentTimeMillis() - start));
-						db.endTransaction();
-
+						//db.endTransaction();
 						setInitMode(mContext, true);
 
 					} catch (SQLException e) {

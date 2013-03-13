@@ -3,11 +3,10 @@ package com.nike.ntc_cn.utils;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.nike.ntc_cn.NtcApplication;
-import com.nike.ntc_cn.db.T_ExercisePagesControl.M_ExercisePages;
-
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+
+import com.nike.ntc_cn.NtcApplication;
 
 //各种工具
 public  class Utils {
@@ -18,9 +17,13 @@ public  class Utils {
         try {
             result = new BitmapDrawable(NtcApplication.getInstance().zipFile.getInputStream(NtcApplication.getInstance().zipfileList
                     .get(i))).getBitmap();
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        
         return result;
     }
 
@@ -46,7 +49,6 @@ public  class Utils {
 				}
         	}
         }
-        
         return null;
 	}
 }

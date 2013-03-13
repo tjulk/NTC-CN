@@ -11,7 +11,7 @@ public abstract class DBControl implements Closeable {
     /**数据库名。*/
     public static final String DB_NAME = "NTC-zCH.db";
     /**数据库版本号，当数据库有变更时增加。*/
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 2;
     
     protected static  Context mContext;
     protected final Executor mExecutor;

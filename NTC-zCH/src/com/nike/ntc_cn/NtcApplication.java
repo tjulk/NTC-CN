@@ -66,12 +66,6 @@ public class NtcApplication extends Application {
 		            }
 		        }
 		        Log.d(TAG,"total files "+ zipfileList.size());
-		        
-		        for (int i=0;i<zipfileList.size();i++) {
-		        	System.out.println("==================================" + zipfileList.get(i).getName());
-		        }
-		        
-		        
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -82,7 +76,7 @@ public class NtcApplication extends Application {
     
     private ArrayList<WeakReference<OnLowMemoryListener>> mLowMemoryListeners;
     
-    private static final int CORE_POOL_SIZE = 5;
+    private static final int CORE_POOL_SIZE = 15;
 
     private static final ThreadFactory sThreadFactory = new ThreadFactory() {
         private final AtomicInteger mCount = new AtomicInteger(1);
@@ -155,7 +149,6 @@ public class NtcApplication extends Application {
                 i++;
             }
         }
-        
     }
 	
 }
