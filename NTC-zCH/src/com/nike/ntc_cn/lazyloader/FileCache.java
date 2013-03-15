@@ -1,4 +1,4 @@
-package com.geniuseoe2012.lazyloaderdemo.cache;
+package com.nike.ntc_cn.lazyloader;
 
 import android.content.Context;
 

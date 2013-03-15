@@ -1,4 +1,4 @@
-package com.geniuseoe2012.lazyloaderdemo.cache;
+package com.nike.ntc_cn.lazyloader;
 
 public class LogFactory {
 	private static final String TAG = "CommonLog";

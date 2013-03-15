@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.geniuseoe2012.lazyloaderdemo.cache.ImageLoader;
 import com.nike.ntc_cn.R;
 import com.nike.ntc_cn.db.T_ExerciseControl.M_Exercises;
+import com.nike.ntc_cn.lazyloader.ImageLoader;
 
 public class TutorialDetailListAdapter extends BaseAdapter{
 	protected LayoutInflater mInflater = null;
