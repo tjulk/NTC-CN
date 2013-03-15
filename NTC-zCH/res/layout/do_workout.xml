@@ -27,7 +27,7 @@
      
     <VideoView 	    
         android:id="@+id/video_view"
-        android:layout_width="match_parent"
+        android:layout_width="480dip"
         android:layout_height="0dip"
         android:animationCache="false"
         android:layout_weight="1"
