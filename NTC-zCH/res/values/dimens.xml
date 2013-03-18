@@ -25,4 +25,8 @@
     <dimen name="actionbar_compat_button_home_width">56dp</dimen>
     
     <dimen name="tutorial_list_item_height">300dip</dimen>
+
+    <dimen name="home_navigation_image_default_width">80dip</dimen>
+	
+	<dimen name="home_navigation_image_default_height">55dip</dimen>
 </resources>

@@ -16,6 +16,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.nike.ntc_cn.db.InitDataControl;
+import com.nike.ntc_cn.lazyloader.ImageCache;
 
 public class NtcApplication extends Application {
 	
@@ -41,7 +42,7 @@ public class NtcApplication extends Application {
 		
         mLowMemoryListeners = new ArrayList<WeakReference<OnLowMemoryListener>>();
         
-		getZipFileFromSDcard();
+		//getZipFileFromSDcard();
 		
         InitDataControl.getInstance(this).init();
 	}
@@ -71,12 +72,16 @@ public class NtcApplication extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+    /******************************** 缓存相关 ****************************************/
+	
+    private ImageCache mImageCache;
     
     private ExecutorService mExecutorService;
     
     private ArrayList<WeakReference<OnLowMemoryListener>> mLowMemoryListeners;
     
-    private static final int CORE_POOL_SIZE = 15;
+    private static final int CORE_POOL_SIZE = 5;
 
     private static final ThreadFactory sThreadFactory = new ThreadFactory() {
         private final AtomicInteger mCount = new AtomicInteger(1);
@@ -86,7 +91,12 @@ public class NtcApplication extends Application {
         }
     };
     
- 
+    public ImageCache getImageCache() {
+        if (mImageCache == null) {
+            mImageCache = new ImageCache(this);
+        }
+        return mImageCache;
+    }
     
     public ExecutorService getExecutor() {
         if (mExecutorService == null) {
@@ -150,5 +160,4 @@ public class NtcApplication extends Application {
             }
         }
     }
-	
 }

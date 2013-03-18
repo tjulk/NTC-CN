@@ -1,209 +1,246 @@
+/*
+ * Copyright (C) 2010 Cyril Mottier (http://www.cyrilmottier.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.nike.ntc_cn.lazyloader;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.WeakHashMap;
+import java.net.URL;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
-import android.widget.ImageView;
-
-import com.nike.ntc_cn.db.T_ExercisePagesControl;
-import com.nike.ntc_cn.db.T_ExercisePagesControl.M_ExercisePages;
 import com.nike.ntc_cn.utils.Utils;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Process;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+
+/**
+ * An ImageLoader asynchronously loads image from a given url. Client may be
+ * notified from the current image loading state using the
+ * {@link ImageLoaderCallback}.
+ * <p>
+ * <em><strong>Note: </strong>You normally don't need to use the {@link ImageLoader}
+ * class directly in your application. You'll generally prefer using an
+ * {@link ImageRequest} that takes care of the entire loading process.</em>
+ * </p>
+ * 
+ */
 public class ImageLoader {
 
-	private MemoryCache memoryCache = new MemoryCache();
-	private AbstractFileCache fileCache;
-	private Map<ImageView, String> imageViews = Collections
-			.synchronizedMap(new WeakHashMap<ImageView, String>());
-	// 线程池
-	private ExecutorService executorService;
-	private Context mContext;
+    private static final String LOG_TAG = ImageLoader.class.getSimpleName();
+    public static interface ImageLoaderCallback {
 
-	public ImageLoader(Context context) {
-		fileCache = new FileCache(context);
-		executorService = Executors.newFixedThreadPool(5);
-		mContext = context;
-	}
+        void onImageLoadingStarted(ImageLoader loader);
 
-	// 最主要的方法
-	@SuppressLint("NewApi")
-	public void DisplayImage(String url, ImageView imageView, boolean isLoadOnlyFromCache) {
-		imageViews.put(imageView, url);
-		// 先从内存缓存中查找
+        void onImageLoadingEnded(ImageLoader loader, Bitmap bitmap);
 
-		Bitmap bitmap = memoryCache.get(url);
-		if (bitmap != null)
-//			imageView.setImageBitmap(bitmap);
-			imageView.setBackground(new BitmapDrawable(mContext.getResources(), bitmap));
-		else if (!isLoadOnlyFromCache){
-			// 若没有的话则开启新线程加载图片
-			queuePhoto(url, imageView);
-		}
-	}
+        void onImageLoadingFailed(ImageLoader loader, Throwable exception);
+    }
 
-	private void queuePhoto(String url, ImageView imageView) {
-		PhotoToLoad p = new PhotoToLoad(url, imageView);
-		executorService.submit(new PhotosLoader(p));
-	}
+    private static final int ON_START = 0x100;
+    private static final int ON_FAIL = 0x101;
+    private static final int ON_END = 0x102;
+    
+    private static ImageCache sImageCache;
+    private static ExecutorService sExecutor;
+    private static BitmapFactory.Options sDefaultOptions;
+    private static AssetManager sAssetManager;
 
-	private Bitmap getBitmap(String url) {
-		File f = fileCache.getFile(url);
-		
-		// 先从文件缓存中查找是否有
-		Bitmap b = null;
-		if (f != null && f.exists()){
-			b = decodeFile(f);
-		}
-		if (b != null){
-			return b;
-		}
-		// 最后从指定的url中下载图片
-		try {
-			Bitmap bitmap = null;
-			
-			List<M_ExercisePages> list = T_ExercisePagesControl.getInstance(mContext).getExercisePagesByExerciseName(url);
-			
-			if (list.size()>0)
-				url= list.get(0).background_image;
-			
-			bitmap = Utils.createBitmapByName(url);
-			
-			return bitmap;
-		} catch (Exception ex) {
-			Log.e("", "getBitmap catch Exception...\nmessage = " + ex.getMessage());
-			return null;
-		}
-	}
+    public ImageLoader(Context context) {
+        if (sImageCache == null) {
+            sImageCache = GDUtils.getImageCache(context);
+        }
+        if (sExecutor == null) {
+            sExecutor = GDUtils.getExecutor(context);
+        }
+        if (sDefaultOptions == null) {
+        	sDefaultOptions = new BitmapFactory.Options();
+        	sDefaultOptions.inDither = true;
+        	sDefaultOptions.inScaled = true;
+        	sDefaultOptions.inDensity = DisplayMetrics.DENSITY_MEDIUM;
+        	sDefaultOptions.inTargetDensity = context.getResources().getDisplayMetrics().densityDpi;
+        }
+        sAssetManager = context.getAssets();
+    }
 
-	// decode这个图片并且按比例缩放以减少内存消耗，虚拟机对每张图片的缓存大小也是有限制的
-	private Bitmap decodeFile(File f) {
-		try {
-			// decode image size
-			BitmapFactory.Options o = new BitmapFactory.Options();
-			o.inJustDecodeBounds = true;
-			BitmapFactory.decodeStream(new FileInputStream(f), null, o);
+    public Future<?> loadImage(String url, ImageLoaderCallback callback) {
+        return loadImage(url, callback, null);
+    }
 
-			// Find the correct scale value. It should be the power of 2.
-			final int REQUIRED_SIZE = 100;
-			int width_tmp = o.outWidth, height_tmp = o.outHeight;
-			int scale = 1;
-//			while (true) {
-//				if (width_tmp / 2 < REQUIRED_SIZE
-//						|| height_tmp / 2 < REQUIRED_SIZE)
-//					break;
-//				width_tmp /= 2;
-//				height_tmp /= 2;
-//				scale *= 2;
-//			}
+    public Future<?> loadImage(String url, ImageLoaderCallback callback, ImageProcessor bitmapProcessor) {
+        return loadImage(url, callback, bitmapProcessor, null);
+    }
+    
+    public Future<?> loadImage(String url, ImageLoaderCallback callback, ImageProcessor bitmapProcessor, BitmapFactory.Options options) {
+        return sExecutor.submit(new ImageFetcher(url, callback, bitmapProcessor, options));
+    }
 
-			// decode with inSampleSize
-			BitmapFactory.Options o2 = new BitmapFactory.Options();
-			o2.inSampleSize = scale;
-			return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
-		} catch (FileNotFoundException e) {
-		}
-		return null;
-	}
+    private class ImageFetcher implements Runnable {
 
-	// Task for the queue
-	private class PhotoToLoad {
-		public String url;
-		public ImageView imageView;
+        private String mUrl;
+        private ImageHandler mHandler;
+        private ImageProcessor mBitmapProcessor;
+        private BitmapFactory.Options mOptions;
 
-		public PhotoToLoad(String u, ImageView i) {
-			url = u;
-			imageView = i;
-		}
-	}
+        public ImageFetcher(String url, ImageLoaderCallback callback, ImageProcessor bitmapProcessor, BitmapFactory.Options options) {
+            mUrl = url;
+            mHandler = new ImageHandler(url, callback);
+            mBitmapProcessor = bitmapProcessor;
+            mOptions = options;
+        }
 
-	class PhotosLoader implements Runnable {
-		PhotoToLoad photoToLoad;
+        public void run() {
 
-		PhotosLoader(PhotoToLoad photoToLoad) {
-			this.photoToLoad = photoToLoad;
-		}
+            Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
-		@Override
-		public void run() {
-			if (imageViewReused(photoToLoad))
-				return;
-			Bitmap bmp = getBitmap(photoToLoad.url);
-			memoryCache.put(photoToLoad.url, bmp);
-			if (imageViewReused(photoToLoad))
-				return;
-			BitmapDisplayer bd = new BitmapDisplayer(bmp, photoToLoad);
-			// 更新的操作放在UI线程中
-			Activity a = (Activity) photoToLoad.imageView.getContext();
-			a.runOnUiThread(bd);
-		}
-	}
+            final Handler h = mHandler;
+            Bitmap bitmap = null;
+            Throwable throwable = null;
 
-	/**
-	 * 防止图片错位
-	 * 
-	 * @param photoToLoad
-	 * @return
-	 */
-	boolean imageViewReused(PhotoToLoad photoToLoad) {
-		String tag = imageViews.get(photoToLoad.imageView);
-		if (tag == null || !tag.equals(photoToLoad.url))
-			return true;
-		return false;
-	}
+            h.sendMessage(Message.obtain(h, ON_START));
 
-	// 用于在UI线程中更新界面
-	class BitmapDisplayer implements Runnable {
-		Bitmap bitmap;
-		PhotoToLoad photoToLoad;
+            try {
 
-		public BitmapDisplayer(Bitmap b, PhotoToLoad p) {
-			bitmap = b;
-			photoToLoad = p;
-		}
+                if (TextUtils.isEmpty(mUrl)) {
+                    throw new Exception("The given URL cannot be null or empty");
+                }
+                
+                InputStream inputStream = null;
+                
+                if (mUrl.startsWith("file:///android_asset/")) {
+                    inputStream = sAssetManager.open(mUrl.replaceFirst("file:///android_asset/", ""));
+                }  
+                
+     	     	final String imagePath =Utils.getImageSDCardPathFromUrl(mUrl);
+     	     	
+    	     	BitmapFactory.Options options = new BitmapFactory.Options(); 
+    	     	bitmap = BitmapFactory.decodeFile(imagePath, options);
+    	     	
+    	     	if(bitmap!=null) {
+    	     		//从sdcard获取bitmap成功
+    	     		h.sendMessage(Message.obtain(h, ON_END, bitmap));
+    	     		return ;
+    	     	} else {
+                    inputStream = new URL(mUrl).openStream();
+                }
 
-		@SuppressLint("NewApi")
-		public void run() {
-			if (imageViewReused(photoToLoad))
-				return;
-			if (bitmap != null)
-				photoToLoad.imageView.setBackground(new BitmapDrawable(mContext.getResources(), bitmap));
-	
-		}
-	}
+                bitmap = BitmapFactory.decodeStream(inputStream, null, (mOptions == null) ? sDefaultOptions : mOptions);
+                
+                if (mBitmapProcessor != null && bitmap != null) {
+                    final Bitmap processedBitmap = mBitmapProcessor.processImage(bitmap);
+                    if (processedBitmap != null) {
+                        bitmap = processedBitmap;
+                    }
+                }
 
-	public void clearCache() {
-		memoryCache.clear();
-		fileCache.clear();
-	}
+            } catch (Exception e) {
+                throwable = e;
+            }
 
-	public static void CopyStream(InputStream is, OutputStream os) {
-		final int buffer_size = 1024;
-		try {
-			byte[] bytes = new byte[buffer_size];
-			for (;;) {
-				int count = is.read(bytes, 0, buffer_size);
-				if (count == -1)
-					break;
-				os.write(bytes, 0, count);
-			}
-		} catch (Exception ex) {
-			Log.e("", "CopyStream catch Exception...");
-		}
-	}
+            if (bitmap == null) {
+                if (throwable == null) {
+                    // Skia returned a null bitmap ... that's usually because
+                    // the given url wasn't pointing to a valid image
+                    throwable = new Exception("Skia image decoding failed");
+                }
+                h.sendMessage(Message.obtain(h, ON_FAIL, throwable));
+            } else {
+            	h.sendMessage(Message.obtain(h, ON_END, bitmap));
+            	storeInSD(bitmap, mUrl);
+            	
+            }
+        }
+    }
+    
+    private void storeInSD(Bitmap bitmap, String url) {
+    	
+    	String name = Utils.getImageNameFromUrl(url);
+    	
+        File file = new File(Utils.imagePathDir);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        File imageFile = new File(file,name);
+        try {
+
+            imageFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(imageFile);
+            bitmap.compress(CompressFormat.JPEG, 50, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private class ImageHandler extends Handler {
+
+        private String mUrl;
+        private ImageLoaderCallback mCallback;
+
+        private ImageHandler(String url, ImageLoaderCallback callback) {
+            mUrl = url;
+            mCallback = callback;
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what) {
+
+                case ON_START:
+                    if (mCallback != null) {
+                        mCallback.onImageLoadingStarted(ImageLoader.this);
+                    }
+                    break;
+
+                case ON_FAIL:
+                    if (mCallback != null) {
+                        mCallback.onImageLoadingFailed(ImageLoader.this, (Throwable) msg.obj);
+                    }
+                    break;
+
+                case ON_END:
+
+                    final Bitmap bitmap = (Bitmap) msg.obj;
+                    sImageCache.put(Utils.getImageNameFromUrl(mUrl), bitmap);
+
+                    if (mCallback != null) {
+                        mCallback.onImageLoadingEnded(ImageLoader.this, bitmap);
+                    }
+                    break;
+
+                default:
+                    super.handleMessage(msg);
+                    break;
+            }
+        };
+    }
+
 }
