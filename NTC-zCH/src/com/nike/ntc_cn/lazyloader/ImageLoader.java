@@ -50,7 +50,7 @@ import android.util.DisplayMetrics;
  */
 public class ImageLoader {
 
-    private static final String LOG_TAG = ImageLoader.class.getSimpleName();
+    public static final String LOG_TAG = ImageLoader.class.getSimpleName();
     public static interface ImageLoaderCallback {
 
         void onImageLoadingStarted(ImageLoader loader);

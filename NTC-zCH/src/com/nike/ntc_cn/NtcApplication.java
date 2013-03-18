@@ -14,6 +14,7 @@ import android.app.Application;
 
 import com.nike.ntc_cn.db.InitDataControl;
 import com.nike.ntc_cn.lazyloader.ImageCache;
+import com.nike.ntc_cn.utils.Utils;
 
 public class NtcApplication extends Application {
 	
@@ -42,6 +43,8 @@ public class NtcApplication extends Application {
 		//getZipFileFromSDcard();
 		
         InitDataControl.getInstance(this).init();
+        
+        Utils.createAPPFolder();
 	}
 
 	public static NtcApplication getInstance() {

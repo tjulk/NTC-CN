@@ -1,6 +1,21 @@
 package com.nike.ntc_cn.db;
 
-public final class T_WorkoutAudioClipsControl {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+
+import com.nike.ntc_cn.db.T_ExerciseControl.M_Exercises;
+import com.nike.ntc_cn.db.T_WorkoutAudioClipsControl.M_WorkoutAudioClips;
+import com.nike.ntc_cn.db.T_WorkoutExercisesControl.WorkoutExercises;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public final class T_WorkoutAudioClipsControl extends DBControl{
 
 	enum WorkoutAudioClips {
 		_id, workout_name, audio_clip_name, is_intro, start_time, archive, ;
@@ -38,6 +53,47 @@ public final class T_WorkoutAudioClipsControl {
 		public int is_intro;
 		public float start_time;
 		public String archive;
+	}
+	
+	private static T_WorkoutAudioClipsControl instance;
+	
+	public T_WorkoutAudioClipsControl(Context context, Executor logExecutor,
+			SQLiteOpenHelper openHelper) {
+		super(context, logExecutor, openHelper);
+	}
+	
+	public static T_WorkoutAudioClipsControl getInstance(Context context) {
+        if (instance == null) {
+            context = context.getApplicationContext();
+            ThreadFactory logThreadFactory = Executors.defaultThreadFactory();
+            Executor logExecutor = Executors.newSingleThreadExecutor(logThreadFactory);
+            SQLiteOpenHelper openHelper = DbOpenHelper.getInstance(context, DBControl.DB_NAME, DBControl.DB_VERSION,
+                    logExecutor);
+            instance = new T_WorkoutAudioClipsControl(context, logExecutor, openHelper);
+        }
+        return instance;
+    }
+
+	public List<M_WorkoutAudioClips> getWorkoutAudioClipsListByWorkoutname(
+			String workoutName) {
+		List<M_WorkoutAudioClips> list = new ArrayList<M_WorkoutAudioClips>();
+		
+		SQLiteDatabase db =  mOpenHelper.getReadableDatabase();
+		
+		Cursor  cursor = db.query(WorkoutAudioClips.TABLE_NAME,WorkoutAudioClips.COLUMNS,
+				WorkoutAudioClips.workout_name + " = '" + workoutName + "'" , null, null, null, " sort_order ");
+		
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+            	//TODO TODO
+                do {
+ 
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+		
+		return list;
 	}
 
 }

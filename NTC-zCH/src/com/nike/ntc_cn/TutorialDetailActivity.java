@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.nike.ntc_cn.adapter.TutorialDetailListAdapter;
 import com.nike.ntc_cn.db.T_ExerciseControl.M_Exercises;
 import com.nike.ntc_cn.db.T_WorkoutExercisesControl;
+import com.nike.ntc_cn.download.DownloadFileAsync;
 
 public class TutorialDetailActivity extends BaseActivity implements OnClickListener{
 	
@@ -53,7 +54,7 @@ public class TutorialDetailActivity extends BaseActivity implements OnClickListe
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.music_btn:
-			
+			new DownloadFileAsync(this).execute(workoutName);
 			break;
 		case R.id.start_btn:
 			Intent intent = new Intent(this,DoWorkoutActivity.class);
