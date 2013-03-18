@@ -72,7 +72,7 @@ public class TutorialDetailListAdapter extends BaseAdapter{
             holder.mSearchRankingItemLayout = (RelativeLayout) convertView.findViewById(R.id.searchranking_item_layout);
             
             holder.itemPage.setImageProcessor(mImageProcessor);
-            holder.itemPage.setDefaultImageResource(R.drawable.recover_ex_thumb);
+            holder.itemPage.setDefaultImageResource(R.drawable.recover_vid_thumb);
             convertView.setTag(holder);
 		}
 		else

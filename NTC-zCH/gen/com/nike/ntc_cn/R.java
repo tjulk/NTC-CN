@@ -293,7 +293,7 @@ containing a value of this type.
         public static final int progress_horizontal_holo_light=0x7f020034;
         public static final int progress_primary_holo_light=0x7f020035;
         public static final int progress_secondary_holo_light=0x7f020036;
-        public static final int recover_ex_thumb=0x7f020037;
+        public static final int recover_vid_thumb=0x7f020037;
         public static final int searchranking_item_seleccted=0x7f020038;
         public static final int searchranking_selector_1=0x7f020039;
         public static final int searchranking_selector_2=0x7f02003a;

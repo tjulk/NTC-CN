@@ -188,7 +188,7 @@ public class ImageLoader {
 
             imageFile.createNewFile();
             FileOutputStream fos = new FileOutputStream(imageFile);
-            bitmap.compress(CompressFormat.JPEG, 50, fos);
+            bitmap.compress(CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
         } catch (FileNotFoundException e) {

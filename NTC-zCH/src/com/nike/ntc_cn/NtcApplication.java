@@ -1,9 +1,7 @@
 package com.nike.ntc_cn;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -13,7 +11,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.nike.ntc_cn.db.InitDataControl;
 import com.nike.ntc_cn.lazyloader.ImageCache;
@@ -52,26 +49,26 @@ public class NtcApplication extends Application {
 	}
 	
 	//获取压缩包
-	private void getZipFileFromSDcard() {
-        try {
-        	zipFile = new ZipFile(zipPath);
-			Enumeration<ZipEntry> en=(Enumeration<ZipEntry>) zipFile.entries();
-			
-		      ZipEntry entry = null;
-		      zipfileList = new ArrayList<ZipEntry>();
-		        while (en.hasMoreElements()) {
-		            entry = en.nextElement();
-		            if (!entry.isDirectory()) {
-		                // 如果文件不是目录，则添加到列表中
-		                zipfileList.add(entry);
-		            }
-		        }
-		        Log.d(TAG,"total files "+ zipfileList.size());
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	//private void getZipFileFromSDcard() {
+	//        try {
+	//        	zipFile = new ZipFile(zipPath);
+	//			Enumeration<ZipEntry> en=(Enumeration<ZipEntry>) zipFile.entries();
+	//			
+	//		      ZipEntry entry = null;
+	//		      zipfileList = new ArrayList<ZipEntry>();
+	//		        while (en.hasMoreElements()) {
+	//		            entry = en.nextElement();
+	//		            if (!entry.isDirectory()) {
+	//		                // 如果文件不是目录，则添加到列表中
+	//		                zipfileList.add(entry);
+	//		            }
+	//		        }
+	//		        Log.d(TAG,"total files "+ zipfileList.size());
+	//			
+	//		} catch (IOException e) {
+	//			e.printStackTrace();
+	//		}
+	//}
 	
     /******************************** 缓存相关 ****************************************/
 	
