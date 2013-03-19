@@ -78,8 +78,10 @@ public class TutorialDetailActivity extends BaseActivity implements OnClickListe
 				String action = intent.getAction();
 				if (action.equals(DownloadBroadcastReceiver.DOWNLOAD_ACTION)) {
 					String name = intent.getStringExtra(TAG_WORKOUT_NAME);
-					if (name.equals(workoutName))
+					if (name.equals(workoutName)) {
 						start_btn.setText("开始健身");
+						workoutArchive = M_Workouts.ARCHIVE_DOWNLOADED;	
+					}
 				}
 			}
 		};
