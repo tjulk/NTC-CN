@@ -43,12 +43,21 @@
         android:layout_margin="1dip"
          />
     
+    <TextView 
+        android:id="@+id/exercise_timer"
+        android:layout_width="fill_parent"
+        android:layout_height="30dip"
+        android:textSize="16dip"
+        android:text="00:12"
+        android:gravity="center"
+       />
     
      <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         
-         <View android:background="@color/bottom_bar_text" android:layout_height="1dip"
+         <View android:background="@color/bottom_bar_text" android:layout_height="2dip"
+             android:layout_gravity="center"
              android:layout_width="0dip" android:layout_weight="1"/>
          
         <TextView android:id="@+id/tutorial_detail_title"
@@ -59,7 +68,8 @@
             android:gravity="center"
             android:text=" PRETZEL STRECH"
             />
-                 <View android:background="@color/divider" android:layout_height="1dip"
+            <View android:background="@color/divider" android:layout_height="2dip"
+                android:layout_gravity="center"
              android:layout_width="0dip" android:layout_weight="1"/>
     </LinearLayout> 
     
@@ -69,7 +79,7 @@
         android:padding="5dip"
         >
             <Button 
-            android:id="@+id/music_btn"
+            android:id="@+id/stop_btn"
             android:layout_width="0dip"
             android:layout_height="match_parent"        
             android:layout_weight="1"
@@ -79,7 +89,7 @@
             android:text="结束训练"
             />        
             <Button 
-                android:id="@+id/start_btn"
+                android:id="@+id/pause_btn"
             android:layout_width="0dip"
             android:layout_height="match_parent"        
             android:gravity="center"

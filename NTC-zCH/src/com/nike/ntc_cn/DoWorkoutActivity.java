@@ -8,6 +8,9 @@ import java.util.TimerTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -17,17 +20,17 @@ import com.nike.ntc_cn.db.T_WorkoutControl.M_Workouts;
 import com.nike.ntc_cn.db.T_WorkoutExercisesControl;
 
 
-public class DoWorkoutActivity extends BaseActivity{
+public class DoWorkoutActivity extends BaseActivity implements OnClickListener{
 	
 	private String workoutName ;
-	
-
 	private M_Workouts workout ;
 	private List<M_Exercises> exercises ;
 	
 	private TextView tutorial_detail_title;
-	
 	private TextView tutorial_total_time;
+	private TextView exercise_timer;
+	private Button stop_btn;
+	private Button pause_btn;
 	
 	private VideoView videoView;
 	private Timer timer;
@@ -54,9 +57,13 @@ public class DoWorkoutActivity extends BaseActivity{
 		tutorial_total_time.setText(getClockTimeFromMinutesNum(totalTime));
 		tutorial_detail_title = (TextView)findViewById(R.id.tutorial_detail_title);
 		tutorial_detail_title.setText(workout.title);
-		
+		exercise_timer = (TextView)findViewById(R.id.exercise_timer);
+		stop_btn = (Button)findViewById(R.id.stop_btn);
+		pause_btn = (Button)findViewById(R.id.pause_btn);
+		stop_btn.setOnClickListener(this);
+		pause_btn.setOnClickListener(this);
 		timer = new Timer(true);  
-		timer.schedule(task,3000, 1000); 
+		timer.schedule(task,1000, 1000); 
 	}
 	
 	@Override
@@ -103,6 +110,24 @@ public class DoWorkoutActivity extends BaseActivity{
         String str=df.format(num);
        return str;
     }
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.pause_btn:
+			
+			break;
+		case R.id.stop_btn:
+			
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private void pauseWorkout() {
+		
+	}
 	
 	
 }
