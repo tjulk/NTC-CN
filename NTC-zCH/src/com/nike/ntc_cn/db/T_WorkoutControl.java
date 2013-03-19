@@ -6,6 +6,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,6 +27,11 @@ public final class T_WorkoutControl extends DBControl{
 	}
 	
 	public class M_Workouts {
+		
+		public static final String ARCHIVE_STANDARD = "standard";
+		public static final String ARCHIVE_DOWNLOADED = "downloaded";
+		
+		
 		public int _id;
 		public String name;
 		public String title;
@@ -94,6 +100,14 @@ public final class T_WorkoutControl extends DBControl{
         }
         return instance;
     }
+	
+	public int changeWorkoutStatus(String isDownloaded, String workoutName) {
+		SQLiteDatabase db =  mOpenHelper.getReadableDatabase();
+		ContentValues values = new ContentValues();
+		values.put(Workouts.archive.name(), isDownloaded);
+		
+		return db.update(Workouts.TABLE_NAME, values, " name = '" + workoutName + "' " , null);
+	}
 	
 	//获取workout列表
 	public List<M_Workouts> getWorkoutsList(String goal, String level) {

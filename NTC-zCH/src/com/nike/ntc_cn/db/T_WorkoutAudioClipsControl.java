@@ -6,10 +6,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-import com.nike.ntc_cn.db.T_ExerciseControl.M_Exercises;
-import com.nike.ntc_cn.db.T_WorkoutAudioClipsControl.M_WorkoutAudioClips;
-import com.nike.ntc_cn.db.T_WorkoutExercisesControl.WorkoutExercises;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -81,13 +77,24 @@ public final class T_WorkoutAudioClipsControl extends DBControl{
 		SQLiteDatabase db =  mOpenHelper.getReadableDatabase();
 		
 		Cursor  cursor = db.query(WorkoutAudioClips.TABLE_NAME,WorkoutAudioClips.COLUMNS,
-				WorkoutAudioClips.workout_name + " = '" + workoutName + "'" , null, null, null, " sort_order ");
-		
+				WorkoutAudioClips.workout_name + " = '" + workoutName + "'" , null, null, null, " _id ");
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-            	//TODO TODO
+                int idIndex = cursor.getColumnIndex(WorkoutAudioClips._id.name());
+                int workout_nameIndex = cursor.getColumnIndex(WorkoutAudioClips.workout_name.name());
+                int audio_clip_nameIndex = cursor.getColumnIndex(WorkoutAudioClips.audio_clip_name.name());
+                int is_introIndex = cursor.getColumnIndex(WorkoutAudioClips.is_intro.name());
+                int start_timeIndex = cursor.getColumnIndex(WorkoutAudioClips.start_time.name());
+                int archiveIndex = cursor.getColumnIndex(WorkoutAudioClips.archive.name());
                 do {
- 
+                	M_WorkoutAudioClips workoutAudioClips = new M_WorkoutAudioClips();
+                	workoutAudioClips._id = cursor.getInt(idIndex);
+                	workoutAudioClips.workout_name = cursor.getString(workout_nameIndex);
+                	workoutAudioClips.audio_clip_name = cursor.getString(audio_clip_nameIndex);
+                	workoutAudioClips.is_intro = cursor.getInt(is_introIndex);
+                	workoutAudioClips.start_time = cursor.getInt(start_timeIndex);
+                	workoutAudioClips.archive = cursor.getString(archiveIndex);
+                	list.add(workoutAudioClips);
                 } while (cursor.moveToNext());
             }
             cursor.close();

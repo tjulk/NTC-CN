@@ -15,7 +15,8 @@ import com.nike.ntc_cn.db.T_WorkoutControl.M_Workouts;
 
 public class TutorialListActivity extends BaseActivity implements OnItemClickListener{
 	
-	public static final String TAG_WORKOUT_NAME = "tag_workout_name";
+	public static final String TAG_WORKOUT_NAME = "tag_workout";
+	public static final String TAG_WORKOUT_IS_DOWNLOAD = "tag_workout_is_download";
 	
 	public static final int TUTORIAL_LIST_BACKGROUND[] = {R.drawable.bg_blue_tile, R.drawable.bg_green_tile, 
 		R.drawable.bg_red_tile, R.drawable.bg_yellow_tile};
@@ -32,9 +33,15 @@ public class TutorialListActivity extends BaseActivity implements OnItemClickLis
 		overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tutorial_list);
-		init();
+
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		init();
+	}
+
 	@Override
 	protected void onPause() {
 		overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
@@ -61,7 +68,8 @@ public class TutorialListActivity extends BaseActivity implements OnItemClickLis
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 		Intent intent = new Intent(this, TutorialDetailActivity.class);
-		intent.putExtra(TAG_WORKOUT_NAME, list.get(position).name);
+		intent.putExtra(TAG_WORKOUT_NAME,list.get(position).name);  
+		intent.putExtra(TAG_WORKOUT_IS_DOWNLOAD,list.get(position).archive.equals(M_Workouts.ARCHIVE_DOWNLOADED));
 		startActivity(intent);
 	}
 	

@@ -58,8 +58,10 @@ public class TutorialListAdapter extends BaseAdapter{
 		else
 			holder = (ViewHolder) convertView.getTag();
   
+		final boolean isDownload = workout.archive.equals(M_Workouts.ARCHIVE_DOWNLOADED);
+		
         holder.itemOrder.setText(""+(position+1));
-        holder.itemName.setText(workout.title);
+        holder.itemName.setText(workout.title + (isDownload?"(已下载)":"(未下载)"));
         holder.itemNumber.setText(workout.duration+" 分");
         int oneOrTwo = ((position%2)==0)?R.drawable.searchranking_selector_2:R.drawable.searchranking_selector_1;
         holder.mSearchRankingItemLayout.setBackgroundResource(oneOrTwo);

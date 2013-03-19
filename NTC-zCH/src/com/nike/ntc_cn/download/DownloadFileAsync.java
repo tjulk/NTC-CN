@@ -7,15 +7,23 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 
+import com.nike.ntc_cn.db.T_ExerciseAudioClipsControl;
+import com.nike.ntc_cn.db.T_ExerciseAudioClipsControl.M_ExerciseAudioClips;
 import com.nike.ntc_cn.db.T_ExerciseControl.M_Exercises;
+import com.nike.ntc_cn.db.T_ExercisePagesControl;
+import com.nike.ntc_cn.db.T_ExercisePagesControl.M_ExercisePages;
 import com.nike.ntc_cn.db.T_WorkoutAudioClipsControl;
 import com.nike.ntc_cn.db.T_WorkoutAudioClipsControl.M_WorkoutAudioClips;
+import com.nike.ntc_cn.db.T_WorkoutControl;
+import com.nike.ntc_cn.db.T_WorkoutControl.M_Workouts;
 import com.nike.ntc_cn.db.T_WorkoutExercisesControl;
 import com.nike.ntc_cn.utils.Utils;
 
@@ -23,12 +31,20 @@ public class DownloadFileAsync extends AsyncTask<String, String, String> {
 	
 	private Context mContext;
 	
+	private TextView textView;
+	
+	private String workoutName ;
+	
+	private int maxFiles = 0;
+	
 	enum DownloadFileType {
 		jpg,ogg,m4v
 	}
 	
-	public DownloadFileAsync(Context context) {
+	public DownloadFileAsync(Context context, TextView tv, String name) {
 		mContext = context;
+		textView = tv;
+		workoutName = name;
 	}
 	
 	@Override
@@ -44,6 +60,12 @@ public class DownloadFileAsync extends AsyncTask<String, String, String> {
 
 	protected void onProgressUpdate(String... progress) {
 		Log.d("ANDRO_ASYNC", progress[0]);
+		textView.setText("下载中("+progress[0]+ "%)");
+		if (progress[0].equals("100")){
+			textView.setText("开始健身");
+			textView.setClickable(true);
+			T_WorkoutControl.getInstance(mContext).changeWorkoutStatus(M_Workouts.ARCHIVE_DOWNLOADED, workoutName);
+		}
 	}
 
 	@Override
@@ -53,27 +75,64 @@ public class DownloadFileAsync extends AsyncTask<String, String, String> {
 	
 	
 	private void initDownloadFiles(String workoutName) {
+		
+		final List<DownloadInfo> downloadInfos = new ArrayList<DownloadInfo>();
+		
 		List<M_WorkoutAudioClips> workoutAudioClips = T_WorkoutAudioClipsControl.getInstance(mContext).getWorkoutAudioClipsListByWorkoutname(workoutName);
-		//TODO 获取每个workout对应所有音频
+		
+		maxFiles+= workoutAudioClips.size();
+		DownloadInfo info;
+		// 获取每个workout对应所有音频
 		for (int i=0;i<workoutAudioClips.size();i++) {
-			final M_WorkoutAudioClips  workoutAudioClip= workoutAudioClips.get(i);
-			downloadFile(DownloadFileType.ogg,workoutAudioClip.audio_clip_name);
+			info = new DownloadInfo();
+			info.type = DownloadFileType.ogg;
+			info.name = workoutAudioClips.get(i).audio_clip_name;
+			downloadInfos.add(info);
 		}
 		
 		List<M_Exercises> exercises = T_WorkoutExercisesControl.getInstance(mContext).getExercisesListByWorkoutname(workoutName);
 		
 		for (int i = 0;i<exercises.size();i++) {
+			
 			final M_Exercises  exercise= exercises.get(i);
-			downloadFile(DownloadFileType.jpg,exercise.thumbnail_medium);
-			downloadFile(DownloadFileType.m4v,exercise.video_name);
+			//获取每个exercise特有图片
+			List<M_ExercisePages> exercisePages = T_ExercisePagesControl.getInstance(mContext).getExercisePagesByExerciseName(exercise.name);
+			//获取每个exercise包含的所有音频
+			List<M_ExerciseAudioClips> exerciseAudioClips = T_ExerciseAudioClipsControl.getInstance(mContext).getM_ExerciseAudioClipsListByExercisename(exercise.name);
 			
-			//TODO 获取每个exercise特有图片
+			info = new DownloadInfo();
+			info.type = DownloadFileType.jpg;
+			info.name = exercise.thumbnail_medium;
+			downloadInfos.add(info);
 			
+			info = new DownloadInfo();
+			info.type = DownloadFileType.m4v;
+			info.name = exercise.video_name;
+			downloadInfos.add(info);
+			
+			for (int k=0;k < exercisePages.size();k++) {
+				info = new DownloadInfo();
+				info.type = DownloadFileType.jpg;
+				info.name = exercisePages.get(k).background_image;
+				downloadInfos.add(info);
+			}
+			
+			for (int j=0;j < exerciseAudioClips.size();j++) {
+				info = new DownloadInfo();
+				info.type = DownloadFileType.ogg;
+				info.name = exerciseAudioClips.get(j).audio_clip_name;
+				downloadInfos.add(info);
+			}
+		}
+		
+		maxFiles = downloadInfos.size();
+		for (int z = 0;z<downloadInfos.size();z++){
+			//开始下载
+			downloadFile(downloadInfos.get(z).type,downloadInfos.get(z).name);
+			publishProgress("" + ((z+1)* 100/maxFiles));
 		}
 		
 	}
-	
-	
 	
 	private void downloadFile(DownloadFileType downloadFileType, String filename) {
 		int count;
@@ -115,15 +174,14 @@ public class DownloadFileAsync extends AsyncTask<String, String, String> {
 			OutputStream output = new FileOutputStream(sdcardFilePath);
 			
 			byte data[] = new byte[1024];
-			long total = 0;
 			while ((count = input.read(data)) != -1) {
-				total += count;
-				publishProgress("" + (int) ((total * 100) / lenghtOfFile));
+				//publishProgress("" + (int) ((total * 100) / lenghtOfFile));
 				output.write(data, 0, count);
 			}
 			output.flush();
 			output.close();
 			input.close();
+			
 		} catch (Exception e) {
 			Log.e("error", e.getMessage().toString());
 			System.out.println(e.getMessage().toString());

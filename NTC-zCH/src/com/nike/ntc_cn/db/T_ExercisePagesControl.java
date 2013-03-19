@@ -6,9 +6,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-import com.nike.ntc_cn.db.T_ExerciseControl.Exercises;
-import com.nike.ntc_cn.db.T_ExerciseControl.M_Exercises;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
