@@ -16,6 +16,14 @@
             android:gravity="center"
             android:text="SWEAT+SHAPE"
             />
+        <TextView android:id="@+id/tutorial_total_time"
+            android:layout_width="fill_parent"
+            android:layout_height="35dip"        
+            android:layout_weight="1"
+            android:textSize="18dip"
+            android:gravity="center"
+            android:text="00:00"
+            />
     </LinearLayout> 
     
     <TextView android:layout_width="match_parent"
@@ -27,7 +35,7 @@
      
     <VideoView 	    
         android:id="@+id/video_view"
-        android:layout_width="480dip"
+        android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:animationCache="false"
         android:layout_weight="1"

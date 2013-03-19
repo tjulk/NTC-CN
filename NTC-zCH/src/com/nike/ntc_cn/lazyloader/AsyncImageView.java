@@ -1,8 +1,6 @@
  
 package com.nike.ntc_cn.lazyloader;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -15,8 +13,6 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.nike.ntc_cn.R;
-import com.nike.ntc_cn.db.T_ExercisePagesControl;
-import com.nike.ntc_cn.db.T_ExercisePagesControl.M_ExercisePages;
 import com.nike.ntc_cn.lazyloader.ImageRequest.ImageRequestCallback;
 import com.nike.ntc_cn.utils.Utils;
 
