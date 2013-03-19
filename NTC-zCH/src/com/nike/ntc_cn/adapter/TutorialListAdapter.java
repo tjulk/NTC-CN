@@ -3,13 +3,10 @@ package com.nike.ntc_cn.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Gallery;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -58,10 +55,16 @@ public class TutorialListAdapter extends BaseAdapter{
 		else
 			holder = (ViewHolder) convertView.getTag();
   
-		final boolean isDownload = workout.archive.equals(M_Workouts.ARCHIVE_DOWNLOADED);
+		String archiveTitle = "";
 		
+		if(M_Workouts.ARCHIVE_DOWNLOADED.equals(workout.archive))
+			archiveTitle = "(已下载)";
+		else if (M_Workouts.ARCHIVE_DOWNLOADING.equals(workout.archive))
+			archiveTitle = "(下载中)";
+		else if (M_Workouts.ARCHIVE_STANDARD.equals(workout.archive))
+			archiveTitle = "(未下载)";
         holder.itemOrder.setText(""+(position+1));
-        holder.itemName.setText(workout.title + (isDownload?"(已下载)":"(未下载)"));
+        holder.itemName.setText(workout.title + archiveTitle);
         holder.itemNumber.setText(workout.duration+" 分");
         int oneOrTwo = ((position%2)==0)?R.drawable.searchranking_selector_2:R.drawable.searchranking_selector_1;
         holder.mSearchRankingItemLayout.setBackgroundResource(oneOrTwo);

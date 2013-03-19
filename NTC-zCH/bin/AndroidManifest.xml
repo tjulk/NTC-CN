@@ -49,6 +49,7 @@
         <activity android:name=".TutorialDetailActivity"/>
         <activity android:name=".DoWorkoutActivity"/>
         <service android:name=".download.DownloadService"/>
+                
     </application>
 
 </manifest>

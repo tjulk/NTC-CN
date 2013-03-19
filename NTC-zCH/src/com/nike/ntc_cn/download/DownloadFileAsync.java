@@ -11,10 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.nike.ntc_cn.TutorialDetailActivity;
 import com.nike.ntc_cn.db.T_ExerciseAudioClipsControl;
 import com.nike.ntc_cn.db.T_ExerciseAudioClipsControl.M_ExerciseAudioClips;
 import com.nike.ntc_cn.db.T_ExerciseControl.M_Exercises;
@@ -25,13 +27,12 @@ import com.nike.ntc_cn.db.T_WorkoutAudioClipsControl.M_WorkoutAudioClips;
 import com.nike.ntc_cn.db.T_WorkoutControl;
 import com.nike.ntc_cn.db.T_WorkoutControl.M_Workouts;
 import com.nike.ntc_cn.db.T_WorkoutExercisesControl;
+import com.nike.ntc_cn.receiver.DownloadBroadcastReceiver;
 import com.nike.ntc_cn.utils.Utils;
 
 public class DownloadFileAsync extends AsyncTask<String, String, String> {
 	
 	private Context mContext;
-	
-	private TextView textView;
 	
 	private String workoutName ;
 	
@@ -41,15 +42,15 @@ public class DownloadFileAsync extends AsyncTask<String, String, String> {
 		jpg,ogg,m4v
 	}
 	
-	public DownloadFileAsync(Context context, TextView tv, String name) {
+	public DownloadFileAsync(Context context, String name) {
 		mContext = context;
-		textView = tv;
 		workoutName = name;
 	}
 	
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
+		T_WorkoutControl.getInstance(mContext).changeWorkoutStatus(M_Workouts.ARCHIVE_DOWNLOADING, workoutName);
 	}
 
 	@Override
@@ -60,11 +61,13 @@ public class DownloadFileAsync extends AsyncTask<String, String, String> {
 
 	protected void onProgressUpdate(String... progress) {
 		Log.d("ANDRO_ASYNC", progress[0]);
-		textView.setText("下载中("+progress[0]+ "%)");
+		
 		if (progress[0].equals("100")){
-			textView.setText("开始健身");
-			textView.setClickable(true);
 			T_WorkoutControl.getInstance(mContext).changeWorkoutStatus(M_Workouts.ARCHIVE_DOWNLOADED, workoutName);
+			Intent intent = new Intent(DownloadBroadcastReceiver.DOWNLOAD_ACTION);
+			intent.putExtra(TutorialDetailActivity.TAG_WORKOUT_NAME, workoutName);
+			mContext.sendBroadcast(intent);
+			Toast.makeText(mContext, "教程" + workoutName + "下载完成", Toast.LENGTH_SHORT).show();
 		}
 	}
 

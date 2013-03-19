@@ -30,6 +30,7 @@ public final class T_WorkoutControl extends DBControl{
 		
 		public static final String ARCHIVE_STANDARD = "standard";
 		public static final String ARCHIVE_DOWNLOADED = "downloaded";
+		public static final String ARCHIVE_DOWNLOADING = "downloading";
 		
 		
 		public int _id;
@@ -101,11 +102,10 @@ public final class T_WorkoutControl extends DBControl{
         return instance;
     }
 	
-	public int changeWorkoutStatus(String isDownloaded, String workoutName) {
+	public int changeWorkoutStatus(String archive, String workoutName) {
 		SQLiteDatabase db =  mOpenHelper.getReadableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(Workouts.archive.name(), isDownloaded);
-		
+		values.put(Workouts.archive.name(), archive);
 		return db.update(Workouts.TABLE_NAME, values, " name = '" + workoutName + "' " , null);
 	}
 	

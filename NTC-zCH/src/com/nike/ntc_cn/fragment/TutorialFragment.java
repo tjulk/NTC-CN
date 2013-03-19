@@ -20,10 +20,7 @@ public class TutorialFragment extends Fragment implements OnClickListener {
 
   private static final String ABOUT_SCHEME = "settings";
   private static final String ABOUT_AUTHORITY = "tutorial";
-  public static final Uri ABOUT_URI = new Uri.Builder()
-  .scheme(ABOUT_SCHEME)
-  .authority(ABOUT_AUTHORITY)
-  .build();
+  public static final Uri ABOUT_URI = new Uri.Builder().scheme(ABOUT_SCHEME).authority(ABOUT_AUTHORITY).build();
   
   private LinearLayout mGetleanBtn;
   private LinearLayout mGettonedBtn;
@@ -46,8 +43,6 @@ public class TutorialFragment extends Fragment implements OnClickListener {
     mGetforcusdBtn.setOnClickListener(this);
     return v;
   }
-  
-  
 
 @Override
 public void onClick(View v) {
@@ -74,8 +69,6 @@ public void onClick(View v) {
 		startActivity(intent);
 		break;
 	}
-	
-
 	
 }
 }

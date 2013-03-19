@@ -26,7 +26,7 @@ public class DoWorkoutActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.do_workout);
 		
-		workoutName = getIntent().getStringExtra(TutorialListActivity.TAG_WORKOUT_NAME);
+		workoutName = getIntent().getStringExtra(TutorialDetailActivity.TAG_WORKOUT_NAME);
 		exercises = T_WorkoutExercisesControl.getInstance(this).getExercisesListByWorkoutname(workoutName);
 		
 		videoView = (VideoView)findViewById(R.id.video_view);

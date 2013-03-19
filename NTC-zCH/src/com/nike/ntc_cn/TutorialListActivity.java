@@ -2,7 +2,9 @@ package com.nike.ntc_cn;
 
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,11 +14,10 @@ import android.widget.ListView;
 import com.nike.ntc_cn.adapter.TutorialListAdapter;
 import com.nike.ntc_cn.db.T_WorkoutControl;
 import com.nike.ntc_cn.db.T_WorkoutControl.M_Workouts;
+import com.nike.ntc_cn.receiver.DownloadBroadcastReceiver;
 
 public class TutorialListActivity extends BaseActivity implements OnItemClickListener{
 	
-	public static final String TAG_WORKOUT_NAME = "tag_workout";
-	public static final String TAG_WORKOUT_IS_DOWNLOAD = "tag_workout_is_download";
 	
 	public static final int TUTORIAL_LIST_BACKGROUND[] = {R.drawable.bg_blue_tile, R.drawable.bg_green_tile, 
 		R.drawable.bg_red_tile, R.drawable.bg_yellow_tile};
@@ -28,6 +29,8 @@ public class TutorialListActivity extends BaseActivity implements OnItemClickLis
 	private String mTutorialGoal ;
 	private String mTutorialLevel ;
 
+	private DownloadBroadcastReceiver receiver;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
@@ -40,11 +43,26 @@ public class TutorialListActivity extends BaseActivity implements OnItemClickLis
 	protected void onResume() {
 		super.onResume();
 		init();
+		
+	    IntentFilter intentFilter = new IntentFilter();
+	    intentFilter.addAction(DownloadBroadcastReceiver.DOWNLOAD_ACTION); 
+	    receiver = new DownloadBroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				super.onReceive(context, intent);
+				
+				fillWorkoutsList(mTutorialGoal, mTutorialLevel);
+			}
+		};
+	    
+	    registerReceiver(receiver,intentFilter); 
+		
 	}
 
 	@Override
 	protected void onPause() {
 		overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+		unregisterReceiver(receiver);
 		super.onPause();
 	}
 	
@@ -68,8 +86,8 @@ public class TutorialListActivity extends BaseActivity implements OnItemClickLis
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 		Intent intent = new Intent(this, TutorialDetailActivity.class);
-		intent.putExtra(TAG_WORKOUT_NAME,list.get(position).name);  
-		intent.putExtra(TAG_WORKOUT_IS_DOWNLOAD,list.get(position).archive.equals(M_Workouts.ARCHIVE_DOWNLOADED));
+		intent.putExtra(TutorialDetailActivity.TAG_WORKOUT_NAME,list.get(position).name);  
+		intent.putExtra(TutorialDetailActivity.TAG_WORKOUT_ARCHIVE,list.get(position).archive);
 		startActivity(intent);
 	}
 	
