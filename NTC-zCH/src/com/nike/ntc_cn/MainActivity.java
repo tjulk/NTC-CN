@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.nike.ntc_cn.adapter.ActionsAdapter;
-import com.nike.ntc_cn.db.T_ExerciseControl;
 import com.nike.ntc_cn.fragment.SandboxFragment;
 import com.nike.ntc_cn.fragment.TutorialFragment;
 import com.nike.ntc_cn.fragment.WebViewFragment;

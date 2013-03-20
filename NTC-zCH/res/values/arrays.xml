@@ -18,11 +18,11 @@
 
     <!-- Actions -->
     <array name="actions_icons">
-        <item>@null</item>
-        <item>@drawable/ic_nav_hangouts</item>
+        <item>@null</item>ic_nav_home
+        <item>@drawable/ic_nav_home</item>
         <item>@drawable/ic_nav_profile</item>
         <item>@null</item>
-        <item>@drawable/ic_nav_home</item>
+        <item>@drawable/ic_nav_hangouts</item>
         <item>@drawable/ic_nav_communities</item>
         <item>@drawable/ic_nav_events</item>
         <item>@drawable/ic_nav_circles</item>
@@ -39,7 +39,7 @@
 
     <string-array name="actions_names">
         <item>Settings</item>
-        <item>教程</item>
+        <item>首页</item>
         <item>下载</item>
         <item>Details</item>
         <item>关于</item>

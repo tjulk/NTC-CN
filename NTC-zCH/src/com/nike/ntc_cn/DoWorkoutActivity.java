@@ -137,7 +137,7 @@ public class DoWorkoutActivity extends BaseActivity implements OnClickListener, 
 		
 		if (exerciseVideoUrl == null) {
 			surfaceView.setBackgroundDrawable(exerciseDrawable);
-			video_player_btn.setVisibility(View.VISIBLE);
+			video_player_btn.setVisibility(View.GONE);
 		} else {
 			surfaceView.setBackgroundResource(0);
 			video_player_btn.setVisibility(View.GONE);
@@ -258,6 +258,7 @@ public class DoWorkoutActivity extends BaseActivity implements OnClickListener, 
 
 	@Override
 	public void onCompletion(MediaPlayer mp) {
+		isPlayingNow = false;
 		surfaceView.setBackgroundDrawable(exerciseDrawable);
 		video_player_btn.setVisibility(View.VISIBLE);
 	}
@@ -265,7 +266,7 @@ public class DoWorkoutActivity extends BaseActivity implements OnClickListener, 
 	@Override
 	public boolean onError(MediaPlayer mp, int what, int extra) {
 		surfaceView.setBackgroundDrawable(exerciseDrawable);
-		video_player_btn.setVisibility(View.VISIBLE);
+		video_player_btn.setVisibility(View.GONE);
 		return false;
 	}
 

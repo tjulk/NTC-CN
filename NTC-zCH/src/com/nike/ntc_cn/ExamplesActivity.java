@@ -1,22 +1,21 @@
  
 package com.nike.ntc_cn;
 
-import com.nike.ntc_cn.adapter.ActionsAdapter;
-import com.nike.ntc_cn.fragment.TutorialListFragment;
-import com.nike.ntc_cn.fragment.SandboxFragment;
-import com.nike.ntc_cn.fragment.WebViewFragment;
-
 import shared.ui.actionscontentview.ActionsContentView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.nike.ntc_cn.adapter.ActionsAdapter;
+import com.nike.ntc_cn.fragment.SandboxFragment;
+import com.nike.ntc_cn.fragment.TutorialListFragment;
+import com.nike.ntc_cn.fragment.WebViewFragment;
 
 public class ExamplesActivity extends BaseActivity {
 
