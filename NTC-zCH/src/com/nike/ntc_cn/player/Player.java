@@ -4,21 +4,23 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.media.MediaPlayer.OnTimedTextListener;
+import android.media.TimedText;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class Player implements OnBufferingUpdateListener, OnCompletionListener,
-		MediaPlayer.OnPreparedListener, SurfaceHolder.Callback {
-	private int videoWidth;
-	private int videoHeight;
+		MediaPlayer.OnPreparedListener, SurfaceHolder.Callback, OnTimedTextListener {
+	//private int videoWidth;
+	//private int videoHeight;
 	public MediaPlayer mediaPlayer;
 	private SurfaceHolder surfaceHolder;
 
 	public Player(SurfaceView surfaceView) {
 		surfaceHolder = surfaceView.getHolder();
 		surfaceHolder.addCallback(this);
-		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		//surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 	}
 
 	public void play() {
@@ -31,7 +33,6 @@ public class Player implements OnBufferingUpdateListener, OnCompletionListener,
 			mediaPlayer.setDataSource(videoUrl);
 			mediaPlayer.prepare();
 			mediaPlayer.setOnCompletionListener(this);
-			mediaPlayer.setOnBufferingUpdateListener(this);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,8 +65,6 @@ public class Player implements OnBufferingUpdateListener, OnCompletionListener,
 			mediaPlayer.setOnBufferingUpdateListener(this);
 			mediaPlayer.setOnPreparedListener(this);
 			
-			//mediaPlayer.prepare();
-			
 		} catch (Exception e) {
 			Log.e("mediaPlayer", "error", e);
 		}
@@ -91,6 +90,11 @@ public class Player implements OnBufferingUpdateListener, OnCompletionListener,
 	@Override
 	public void onBufferingUpdate(MediaPlayer arg0, int bufferingProgress) {
  
+	}
+
+	@Override
+	public void onTimedText(MediaPlayer mp, TimedText text) {
+		
 	}
 
 }

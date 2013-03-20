@@ -71,7 +71,7 @@ public  class Utils {
 	}
 	
 	public static String getVideoSDCardPathFromName(String nameWithEnd) {
-		return videoPathDir + nameWithEnd;
+		return videoPathDir + nameWithEnd + ".m4v";
 	}
 	
 	public static String getVideoSDCardPathFromUrl(String url) {
