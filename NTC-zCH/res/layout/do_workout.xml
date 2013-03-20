@@ -33,13 +33,11 @@
         android:textColor="@android:color/darker_gray"/>
     
      
-    <VideoView 	    
+    <SurfaceView 	    
         android:id="@+id/video_view"
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:animationCache="false"
+        android:layout_height="300dip"
         android:layout_weight="1"
-        android:divider="#E5E5E5"
         android:layout_margin="1dip"
          />
     

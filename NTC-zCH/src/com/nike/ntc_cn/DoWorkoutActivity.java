@@ -8,16 +8,17 @@ import java.util.TimerTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.nike.ntc_cn.db.T_ExerciseControl.M_Exercises;
 import com.nike.ntc_cn.db.T_WorkoutControl;
 import com.nike.ntc_cn.db.T_WorkoutControl.M_Workouts;
 import com.nike.ntc_cn.db.T_WorkoutExercisesControl;
+import com.nike.ntc_cn.player.Player;
 
 
 public class DoWorkoutActivity extends BaseActivity implements OnClickListener{
@@ -32,8 +33,9 @@ public class DoWorkoutActivity extends BaseActivity implements OnClickListener{
 	private Button stop_btn;
 	private Button pause_btn;
 	
-	private VideoView videoView;
+	private SurfaceView surfaceView;
 	private Timer timer;
+	private Player player;
 	
 	private int totalTime = 0;
 	
@@ -49,8 +51,10 @@ public class DoWorkoutActivity extends BaseActivity implements OnClickListener{
 		
 		exercises = T_WorkoutExercisesControl.getInstance(this).getExercisesListByWorkoutname(workoutName);
 		
-		videoView = (VideoView)findViewById(R.id.video_view);
+		surfaceView = (SurfaceView)findViewById(R.id.video_view);
 		
+		player = new Player(surfaceView);
+
 		totalTime = workout.duration * 60;
 		
 		tutorial_total_time = (TextView)findViewById(R.id.tutorial_total_time);
@@ -64,11 +68,26 @@ public class DoWorkoutActivity extends BaseActivity implements OnClickListener{
 		pause_btn.setOnClickListener(this);
 		timer = new Timer(true);  
 		timer.schedule(task,1000, 1000); 
+		
+		playerVideoDely();
 	}
 	
 	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+	private void playerVideoDely() {
+		Message message = new Message();
+		message.what = 2;
+		handler.sendMessageDelayed(message,2000);
+	}
+
+
+	@Override
 	protected void onPause() {
 		overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+		player.pause();
 		super.onPause();
 	}
 	
@@ -86,6 +105,13 @@ public class DoWorkoutActivity extends BaseActivity implements OnClickListener{
 				tutorial_total_time.setText(getClockTimeFromMinutesNum(totalTime));
 				if (totalTime == 0)
 					timer.cancel();
+				break;
+				
+			case 2:
+				
+				String url = "mnt/sdcard/.ntc/videos/toe-touch.m4v";
+				player.playUrl(url);
+				player.play();
 				
 				break;
 			}
@@ -115,7 +141,9 @@ public class DoWorkoutActivity extends BaseActivity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.pause_btn:
-			
+			String url = "mnt/sdcard/.ntc/videos/toe-touch.m4v";
+			player.playUrl(url);
+			player.play();
 			break;
 		case R.id.stop_btn:
 			
@@ -124,10 +152,5 @@ public class DoWorkoutActivity extends BaseActivity implements OnClickListener{
 			break;
 		}
 	}
-	
-	private void pauseWorkout() {
-		
-	}
-	
 	
 }
