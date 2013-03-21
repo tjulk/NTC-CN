@@ -57,8 +57,8 @@ public final class InitDataControl extends DBControl{
 			@Override
 			protected boolean performTransaction(SQLiteDatabase db) {
 				long start = System.currentTimeMillis();
-				Log.i(TAG,"=======start  init the databases:" + start);
 				if (!isInitMode(mContext)) {
+					Log.i(TAG,"=======start  init the databases:" + start);
 					try {
 						//db.beginTransaction();
 						InputStream in = mContext.getAssets().open("content.sql");
@@ -79,8 +79,8 @@ public final class InitDataControl extends DBControl{
 					} catch (SQLException e) {
 					} catch (IOException e) {
 					}
+					Log.i(TAG,"=======end  init the databases:" + (System.currentTimeMillis() - start));
 				}
-				Log.i(TAG,"=======end  init the databases:" + (System.currentTimeMillis() - start));
  
 				return true;
 			}

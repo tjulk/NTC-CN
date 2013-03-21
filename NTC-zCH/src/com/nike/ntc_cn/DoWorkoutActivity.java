@@ -150,6 +150,12 @@ public class DoWorkoutActivity extends BaseActivity implements OnClickListener, 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		if (isPause)
+			pause_btn.setText("继续训练");
+		else
+			pause_btn.setText("暂停训练");
+		
 		playExerciseVideo();
 	}
 
@@ -158,6 +164,9 @@ public class DoWorkoutActivity extends BaseActivity implements OnClickListener, 
 		overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
 		if (surfaceView.isPlaying())
 			surfaceView.pause();
+		
+		isPause = true;
+		
 		super.onPause();
 	}
 	
