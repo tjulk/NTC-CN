@@ -49,8 +49,8 @@ public  class Utils {
 		return url.substring(url.lastIndexOf("/")+1, url.lastIndexOf("?raw=true"));
 	}
 	
-	public static String getAudioSDCardPathFromName(String nameWithEnd) {
-		return audioPathDir + nameWithEnd;
+	public static String getAudioSDCardPathFromName(String nameWithoutEnd) {
+		return audioPathDir + nameWithoutEnd + ".ogg";
 	}
 	
 	public static String getAudioSDCardPathFromUrl(String url) {
@@ -70,8 +70,8 @@ public  class Utils {
 		return url.substring(url.lastIndexOf("/")+1, url.lastIndexOf("?raw=true"));
 	}
 	
-	public static String getVideoSDCardPathFromName(String nameWithEnd) {
-		return videoPathDir + nameWithEnd + ".m4v";
+	public static String getVideoSDCardPathFromName(String nameWithoutEnd) {
+		return videoPathDir + nameWithoutEnd + ".m4v";
 	}
 	
 	public static String getVideoSDCardPathFromUrl(String url) {
