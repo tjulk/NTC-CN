@@ -15,7 +15,7 @@
 -->
 <resources>
 
-    <string name="app_name">健身俱乐部</string>
+    <string name="app_name">健身教练</string>
     <string name="link_to_sources">source code is here &#187;</string>
     <string name="about_details"><b>ActionsContentView</b> is an standalone library implements actions/content swiping view (AKA Side Navigation UI Pattern, AKA Facebook side menu). The library doesn\'t use any specific code introduced in new Android SDK versions. This allows develop an application with an action/content swiping view for every version of Android from 2.2 and up.\n\nThis application shows abilities of the library and allows you to play with some values of ActionsContentView control.</string>
     <string name="about_play">Play in sandbox</string>
