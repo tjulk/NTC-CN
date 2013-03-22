@@ -2,12 +2,15 @@ package com.nike.ntc_cn.download;
 
 import java.util.List;
 
+import com.nike.ntc_cn.R;
 import com.nike.ntc_cn.db.T_WorkoutControl;
 import com.nike.ntc_cn.db.T_WorkoutControl.M_Workouts;
+import com.nike.ntc_cn.receiver.DownloadBroadcastReceiver;
 
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -23,8 +26,12 @@ public class DownloadService extends Service {
 	private String mType = T_DOWNLOAD_TYPE_WHOLE;
 	private String mWorkoutName ;
 	
-	private boolean isDownloadingAll = false;
+	private int mAllDownloadIndex = 0;
 
+	private DownloadBroadcastReceiver receiver;
+	
+	private List<M_Workouts> workouts;
+	
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -36,9 +43,27 @@ public class DownloadService extends Service {
 	public void onCreate() {
 		super.onCreate();
 		mContext = this;
+		
+	    IntentFilter intentFilter = new IntentFilter();
+	    intentFilter.addAction(DownloadBroadcastReceiver.DOWNLOAD_ACTION); 
+	    receiver = new DownloadBroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				super.onReceive(context, intent);
+				if (mAllDownloadIndex > 0)
+				   downloadAllWorkoutByIndex();
+			}
+		};
+	    
+	    registerReceiver(receiver,intentFilter); 
 	}
 
 
+	@Override
+	public void onDestroy() {
+		unregisterReceiver(receiver);
+		super.onDestroy();
+	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -52,8 +77,7 @@ public class DownloadService extends Service {
 		
 		if (mType.equals(T_DOWNLOAD_TYPE_WHOLE)) {
 			downloadAllWorkouts();
-		}
-		else if (mType.equals(T_DOWNLOAD_TYPE_WORKOUT)){
+		} else if (mType.equals(T_DOWNLOAD_TYPE_WORKOUT)){
 			mWorkoutName = intent.getStringExtra(TAG_WORKOUT_NAME);
 			downloadWorkoutByName();
 		}
@@ -64,31 +88,21 @@ public class DownloadService extends Service {
 	
 	
 	private void downloadAllWorkouts() {
-		List<M_Workouts> workouts = T_WorkoutControl.getInstance(mContext).getAllUnDownloadWorkouts();
+		//workouts = T_WorkoutControl.getInstance(mContext).getAllUnDownloadWorkouts();
+		
 		if (workouts.size() == 0)
             Toast.makeText(this, "所有教程已下载/正在下载中", Toast.LENGTH_SHORT).show();
-		else
+		else {
             Toast.makeText(this, "正在下载剩余教程", Toast.LENGTH_SHORT).show();
-		int delay = 0;
-		for (int i=0 ;i< workouts.size();i++) {
-			mWorkoutName = 	workouts.get(i).name;	
-			
-			handler.sendEmptyMessageDelayed(0, delay);
-			delay = delay + 3000;
+            downloadAllWorkoutByIndex();
 		}
 		
-		isDownloadingAll = true;
 	}
 	
-	
-	Handler handler = new Handler(){
-		@Override
-		public void handleMessage(Message msg) {
-			downloadWorkoutByName();
-			super.handleMessage(msg);
-		}
-		
-	};
+	private void downloadAllWorkoutByIndex() {
+		new DownloadFileAsync(mContext,workouts.get(mAllDownloadIndex).name).execute(workouts.get(mAllDownloadIndex).name);
+		mAllDownloadIndex++;
+	}
 	
 	private void downloadWorkoutByName() {
 		new DownloadFileAsync(mContext,mWorkoutName).execute(mWorkoutName);
