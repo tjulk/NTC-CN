@@ -1,11 +1,13 @@
 package com.nike.ntc_cn;
 
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.nike.ntc_cn.actionbar.ActionBarActivity;
+import com.nike.ntc_cn.download.DownloadService;
 
 /**
  * @ClassName: BaseActivity 
@@ -43,10 +45,13 @@ public class BaseActivity extends ActionBarActivity{
 	                        }, 1000);
 	                break;
 
-	            case R.id.menu_search:
-	                Toast.makeText(this, "Tapped search", Toast.LENGTH_SHORT).show();
+	            case R.id.menu_download:
+	            	
+					Intent intent = new Intent(this, DownloadService.class);
+					intent.putExtra(DownloadService.TAG_DOWNLOAD_TYPE, DownloadService.T_DOWNLOAD_TYPE_WHOLE);
+					startService(intent);
 	                break;
-
+	                
 	            case R.id.menu_share:
 	                Toast.makeText(this, "Tapped share", Toast.LENGTH_SHORT).show();
 	                break;
